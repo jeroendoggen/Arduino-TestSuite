@@ -1,7 +1,7 @@
-Arduino-TestSuite
+Arduino TestSuite
 -----------------
 
-### Arduino TestSuite to automate Arduino unit tests
+### Python Script to automate Arduino Unit Tests
 
  * The unit tests are written with the "Arduino Unit Testing Library": http://code.google.com/p/arduinounit
  * The tests also use "Arduino Unit Testing Helper Library": http://code.google.com/p/arduino-unit-test-helper-library
