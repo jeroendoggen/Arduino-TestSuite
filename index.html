@@ -28,7 +28,7 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h2>Arduino-TestSuite</h2>
+          <h2>Arduino TestSuite</h2>
 
 <h3>Python Script to automate Arduino Unit Tests</h3>
 
@@ -39,7 +39,7 @@
 </li>
 <li>The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": <a href="http://github.com/suapapa/arscons">http://github.com/suapapa/arscons</a>
 </li>
-</ul><h3>Program flow:</h3>
+</ul><h3>Program Flow:</h3>
 
 <p>These steps are performed for each set of unit tests (typically to test one Arduino library)</p>
 
@@ -50,6 +50,41 @@
 </ol><p>Steps 1,2 and 3 are repeated for all the libraries that you are using in the project.</p>
 
 <p>The script prints a summary showing an overview of the failed/passed test in the complete testsuite.</p>
+
+<h3>Typical Output:</h3>
+
+<pre><code>================================================================================
+Planned tests:
+ 1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
+ 2. My_Module/examples/TestSuite/
+
+Program flow: 
+ 1. Compile TestSuite sketch
+ 2. Upload sketch using Arscons
+ 3. Check unit test output
+
+================================================================================
+Starting test: DistanceSensor/examples/GP2Y0A21YK/TestSuite/
+--------------------------------------------------------------------------------
+Running test suite...
+Tests run: 3 Successful: 3 Failed: 0
+
+================================================================================
+Starting test: My_Module/examples/TestSuite/
+--------------------------------------------------------------------------------
+Running test suite...
+Assertion failed in 'temperatureRange' on line 68
+Tests run: 3 Successful: 2 Failed: 1
+
+================================================================================
+Summary: 
+Failed tests:
+ 1. My_Module/examples/TestSuite/
+
+Passed tests:
+ 1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
+================================================================================
+</code></pre>
         </section>
 
         <aside id="sidebar">
