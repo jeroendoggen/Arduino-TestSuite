@@ -13,14 +13,14 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Arduino-testsuite by jeroendoggen</title>
+    <title>Arduino TestSuite by jeroendoggen</title>
   </head>
 
   <body>
     <header>
       <div class="inner">
-        <h1>Arduino-testsuite</h1>
-        <h2>Arduino TestSuite to automate Arduino unit tests</h2>
+        <h1>Arduino TestSuite</h1>
+        <h2>Python Script to automate Arduino Unit Tests</h2>
         <a href="https://github.com/jeroendoggen/Arduino-TestSuite" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
@@ -30,34 +30,26 @@
         <section id="main-content">
           <h2>Arduino-TestSuite</h2>
 
-<h3>Arduino TestSuite to automate Arduino unit tests</h3>
+<h3>Python Script to automate Arduino Unit Tests</h3>
 
 <ul>
-<li>The unit tests are written using the Arduinounit library: <a href="http://code.google.com/p/arduinounit">http://code.google.com/p/arduinounit</a>
+<li>The unit tests are written with the "Arduino Unit Testing Library": <a href="http://code.google.com/p/arduinounit">http://code.google.com/p/arduinounit</a>
 </li>
-<li>The tests my unit test helper class: <a href="http://code.google.com/p/arduino-unit-test-helper-library">http://code.google.com/p/arduino-unit-test-helper-library</a>
+<li>The tests also use "Arduino Unit Testing Helper Library": <a href="http://code.google.com/p/arduino-unit-test-helper-library">http://code.google.com/p/arduino-unit-test-helper-library</a>
 </li>
-<li>The code is uploaded to the Arduino board using Arscons: <a href="http://code.google.com/p/arscons/">http://code.google.com/p/arscons/</a>
+<li>The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": <a href="http://github.com/suapapa/arscons">http://github.com/suapapa/arscons</a>
 </li>
 </ul><h3>Program flow:</h3>
 
-<ul>
-<li>Start test 1
+<p>These steps are performed for each set of unit tests (typically to test one Arduino library)</p>
 
 <ol>
 <li>Compile a sketch that runs several unit tests</li>
 <li>Upload and run the sketch using Arscons</li>
 <li>Check unit test output</li>
-</ol>
-</li>
-<li>Start test 2
+</ol><p>Steps 1,2 and 3 are repeated for all the libraries that you are using in the project.</p>
 
-<ul>
-<li>Repeat steps 1, 2, 3</li>
-</ul>
-</li>
-<li>Print summary</li>
-</ul>
+<p>The script prints a summary showing an overview of the failed/passed test in the complete testsuite.</p>
         </section>
 
         <aside id="sidebar">
