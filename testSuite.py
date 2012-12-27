@@ -24,9 +24,13 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+# MA  02110-1301, USA.
 
-import sys,serial,time,os
+import sys
+import serial
+import time
+import os
 
 DEFAULT_PORT = "/dev/ttyUSB0"
 DEFAULT_BAUDRATE = 9600
@@ -39,57 +43,64 @@ ser.flush()
 notFinished = True    # boolean value
 line = ""
 
-TestList = [ "DistanceSensor/examples/GP2Y0A21YK/TestSuite/",
-             "LT_Module/examples/TestSuite/" ]
-             
+TestList = ["DistanceSensor/examples/GP2Y0A21YK/TestSuite/",
+            "LT_Module/examples/TestSuite/"]
+
 FailedTestList = []
 PassedTestList = []
 
+
 def printMarker1():
-    print "================================================================================"
-    
+    print "==================================================================="
+
+
 def printMarker2():
-    print "--------------------------------------------------------------------------------"    
+    print "-------------------------------------------------------------------"
+
 
 def readLine():
-    global line,notFinished
+    global line, notFinished
     line = ser.readline()
     line = line[:-1]
     print line
-    if( line.find("Tests run:") == 0 ):
+    if(line.find("Tests run:") == 0):
         notFinished = False
-     
+
+
 def printPlannedTests():
     print ""
     printMarker1()
     print "Planned tests:"
     for index, item in enumerate(TestList):
-        print " " + str(index+1) + ". " + item
-    print ""  
-    print "Program flow: "  
+        print " " + str(index + 1) + ". " + item
+    print ""
+    print "Program flow: "
     print " 1. Compile TestSuite sketch"
     print " 2. Upload sketch using Arscons"
     print " 3. Check unit test output"
-    print ""  
-    
+    print ""
+
+
 def printSummary():
     printMarker1()
-    print "Summary: " 
+    print "Summary: "
     print "Failed tests:"
     for index, item in enumerate(FailedTestList):
-        print " " + str(index+1) + ". " + item
-    print ""  
+        print " " + str(index + 1) + ". " + item
+    print ""
     print "Passed tests:"
     for index, item in enumerate(PassedTestList):
-        print " " + str(index+1) + ". " + item
+        print " " + str(index + 1) + ". " + item
     printMarker1()
     print ""
+
 
 def uploadSketch():
     os.system("scons upload >> /dev/null")
 
+
 def analyzeOutput(item):
-    global notFinished,PassedTestList
+    global notFinished, PassedTestList
     printMarker2()
     while notFinished:
         readLine()
@@ -99,7 +110,8 @@ def analyzeOutput(item):
         PassedTestList.append(item)
     else:
         FailedTestList.append(item)
-    
+
+
 def startTests():
     for index, item in enumerate(TestList):
         os.chdir(scriptPath)
@@ -110,12 +122,13 @@ def startTests():
         printMarker2()
         uploadSketch()
         analyzeOutput(item)
-              
-def main(argv=None): 
+
+
+def main(argv=None):
     printPlannedTests()
     startTests()
     printSummary()
-    
+
+
 if __name__ == "__main__":
     sys.exit(main())
-    
