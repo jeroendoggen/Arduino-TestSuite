@@ -19,35 +19,43 @@ The script prints a summary showing an overview of the failed/passed test in the
 
 ### Typical Output:
 ````
-================================================================================
+=============================================================
 Planned tests:
+-------------------------------------------------------------
  1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
  2. My_Module/examples/TestSuite/
 
-Program flow: 
+Program flow:
  1. Compile TestSuite sketch
  2. Upload sketch using Arscons
  3. Check unit test output
 
-================================================================================
+=============================================================
 Starting test: DistanceSensor/examples/GP2Y0A21YK/TestSuite/
---------------------------------------------------------------------------------
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Upload succesfull
 Running test suite...
 Tests run: 3 Successful: 3 Failed: 0
 
-================================================================================
+Running test suite...
+Tests run: 3 Successful: 3 Failed: 0
+
+=============================================================
 Starting test: My_Module/examples/TestSuite/
---------------------------------------------------------------------------------
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Upload succesfull
 Running test suite...
 Assertion failed in 'temperatureRange' on line 68
 Tests run: 3 Successful: 2 Failed: 1
 
-================================================================================
+=============================================================
 Summary: 
 Failed tests:
  1. My_Module/examples/TestSuite/
 
 Passed tests:
  1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
-================================================================================
+=============================================================
 ````
