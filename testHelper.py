@@ -47,3 +47,9 @@ class TestHelper:
                 return None
 
         return process.poll()
+
+    def report(self, failureCount):
+        if (failureCount == 0):
+            return 0
+        else:
+            return 42

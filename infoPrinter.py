@@ -26,28 +26,64 @@ import os
 import subprocess
 
 
-class InfoPrinter:
+class InfoPrinterHelper:
     def printMarker1(self):
-        print ('=============================================================')
+        print ("=============================================================")
 
     def printMarker2(self):
-        print ('-------------------------------------------------------------')
-
-    def printProgramFlow(self):
-        print ('')
-        print ('Program flow: ')
-        print (' 1. Compile TestSuite sketch')
-        print (' 2. Upload sketch using Arscons')
-        print (' 3. Check unit test output')
+        print ("-------------------------------------------------------------")
 
     def printTop(self):
-        print ('')
+        print ("")
         self.printMarker1()
-        print ('Planned tests:')
+        print ("Planned tests:")
+
+    def printProgramFlow(self):
+        print ("")
+        print ("Program flow: ")
+        print (" 1. Compile TestSuite sketch")
+        print (" 2. Upload sketch using Arscons")
+        print (" 3. Check unit test output")
+
+
+class InfoPrinter:
+    helper = InfoPrinterHelper()
+
+    def plannedTests(self, testList):
+        self.helper.printTop()
+        for index, item in enumerate(testList):
+            print (index + 1, end="")
+            print (". ", end="")
+            print (item.path)
+        self.helper.printProgramFlow()
 
     def printSetupInfo(self, item):
-        print ('')
-        self.printMarker1()
-        print ('Starting test: ' + item)
-        self.printMarker2()
-        print ('Uploading sketch to Arduino...')
+        print ("")
+        self.helper.printMarker1()
+        print ("Starting test: " + item)
+        self.helper.printMarker2()
+        print ("Compiling & uploading sketch to Arduino...")
+
+    def printSummary(self, FailedTestList, PassedTestList):
+        print ("")
+        self.helper.printMarker1()
+        print ("Summary: ")
+        self.helper.printMarker2()
+        print ("Failed tests:")
+        for index, item in enumerate(FailedTestList):
+            print (" " + str(index + 1) + "." + item)
+        print ("")
+        print ("Passed tests:")
+        for index, item in enumerate(PassedTestList):
+            print (" " + str(index + 1) + "." + item)
+        self.helper.printMarker1()
+        print ("")
+
+    def uploadStatus(self, state):
+        if (state == 0):
+            self.uploadFinished = True
+            print ("Upload succesfull")
+            #print(".", end="")
+        else:
+            self.uploadFinished = False
+            print ("Upload Failed")

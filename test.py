@@ -32,3 +32,6 @@ from infoPrinter import InfoPrinter
 class Test:
     def __init__(self, path):
         self.path = path
+
+    def analyzeOutput(self):
+        print ("analyzeOutput")

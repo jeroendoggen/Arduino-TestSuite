@@ -58,17 +58,13 @@ class TestSuite:
         initSerialPort()
 
     def printPlannedTests(self):
-        printer.printTop()
-        for index, item in enumerate(self.testList):
-            print (item.path)
-        printer.printProgramFlow()
+        printer.plannedTests(self.testList)
 
     def runTests(self):
-        for index, item in enumerate(self.testList):
-            print (item.path)
-            self.setUp(item.path)
+        for index, test in enumerate(self.testList):
+            self.setUp(test.path)
             self.uploadSketch()
-            self.analyzeOutput(item.path)
+            self.analyzeOutput(test.path)
 
     def setUp(self, item):
         os.chdir(librariesPath)
@@ -77,13 +73,7 @@ class TestSuite:
 
     def uploadSketch(self):
         state = helper.timeout_command("scons upload", 10)
-        if (state == 0):
-            self.uploadFinished = True
-            print ('Upload succesfull')
-            #print('.', end="")
-        else:
-            self.uploadFinished = False
-            print ('Upload Failed')
+        printer.uploadStatus(state)
 
     def analyzeOutput(self, item):
         while self.notFinished:
@@ -101,27 +91,12 @@ class TestSuite:
             self.line = ser.readline().decode('utf-8')[:-1]
             print (self.line)
         except:
-            print ('unexpectedly lost serial connection')
+            print ("unexpectedly lost serial connection")
         if(self.line.find("Tests run:") == 0):
             self.notFinished = False
 
     def printSummary(self):
-        print ('')
-        printer.printMarker1()
-        print ('Summary: ')
-        printer.printMarker2()
-        print ('Failed tests:')
-        for index, item in enumerate(self.FailedTestList):
-            print (' ' + str(index + 1) + '.' + item)
-        print ('')
-        print ('Passed tests:')
-        for index, item in enumerate(self.PassedTestList):
-            print (' ' + str(index + 1) + '.' + item)
-        printer.printMarker1()
-        print ('')
+        printer.printSummary(self.FailedTestList, self.PassedTestList)
 
     def report(self):
-        if (self.failureCount == 0):
-            return 0
-        else:
-            return 42
+        return(helper.report(self.failureCount))

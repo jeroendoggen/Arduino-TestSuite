@@ -43,12 +43,6 @@ import subprocess
 from test import Test
 from testSuite import TestSuite
 
-DEFAULT_PORT = "/dev/ttyUSB0"
-DEFAULT_BAUDRATE = 9600
-ser = ""
-
-librariesPath = "/usr/share/arduino/libraries"
-
 distanceTest = Test("DistanceSensor/examples/GP2Y0A21YK/TestSuite/")
 moduleTest = Test("LT_Module/examples/TestSuite/")
 
