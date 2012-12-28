@@ -2,7 +2,21 @@
 #
 # Arduino TestSuite to automate unit tests on the Arduino platform
 # Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
-# More info in "main.py"
+#
+# Version History:
+#  - Version 0.1: call scons
+#                 run unit test
+#                 print summary
+#                 
+#  - Version 0.2: subprocess for arscons
+#                 classes: Test, TestSuite, InfoPrinter, 
+#
+# Roadmap:
+#  - Clean up code
+#  - use subprocesses
+#  - accept commandline parameters (options, silent, debug,..)
+#  - logging to a file
+#  - what to to when arscons fails? (how to report?)
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -25,22 +39,65 @@ import time
 import os
 import subprocess
 
-from infoPrinter import InfoPrinter
-from testHelper import TestHelper
-
 DEFAULT_PORT = "/dev/ttyUSB0"
 DEFAULT_BAUDRATE = 9600
 ser = ""
 
 librariesPath = "/usr/share/arduino/libraries"
 
-printer = InfoPrinter()
-helper = TestHelper()
 
 def initSerialPort():
     global ser
     ser = serial.Serial(DEFAULT_PORT, DEFAULT_BAUDRATE)
     ser.flush()
+
+class Helper:
+    def timeout_command(self, command, timeout):
+        #"""call shell-command and either return its output or kill it
+        #if it doesn't normally exit within timeout seconds and return None"""
+        import subprocess, datetime, os, time, signal
+
+        cmd = command.split(" ")
+        start = datetime.datetime.now()
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, \
+          stderr=subprocess.PIPE)
+
+        while process.poll() is None:
+            time.sleep(1)
+            now = datetime.datetime.now()
+            if (now - start).seconds > timeout:
+                os.kill(process.pid, signal.SIGKILL)
+                os.waitpid(-1, os.WNOHANG)
+                return None
+
+        return process.poll()
+
+class InfoPrinter:
+    def printMarker1(self):
+        print ('===================================================================')
+
+    def printMarker2(self):
+        print ('-------------------------------------------------------------------')
+
+    def printProgramFlow(self):
+        print ('')
+        print ('Program flow: ')
+        print (' 1. Compile TestSuite sketch')
+        print (' 2. Upload sketch using Arscons')
+        print (' 3. Check unit test output')
+
+    def printTop(self):
+        print ('')
+        printer.printMarker1()
+        print ('Planned tests:')
+        
+    def printSetupInfo(self, item):
+        print ('')
+        printer.printMarker1()
+        print ('Starting test: ' + item )
+        printer.printMarker2()
+        print ('Uploading sketch to Arduino...')
+
 
 class TestSuite:
     notFinished = True    # boolean value
@@ -49,23 +106,17 @@ class TestSuite:
     PassedTestList = []
     failureCount= 0
     line = []
-    testList =[]
-
-    
-    def __init__(self, testList):
-        self.testList = testList
-        initSerialPort()
-        
+    ser
         
     def printPlannedTests(self):
         printer.printTop()
-        for index, item in enumerate(self.testList):
+        for index, item in enumerate(testList):
             print (item.path)
         printer.printProgramFlow()
 
     
     def runTests(self):
-        for index, item in enumerate(self.testList):
+        for index, item in enumerate(testList):
             print (item.path)
             self.setUp(item.path)
             self.uploadSketch()
@@ -76,7 +127,6 @@ class TestSuite:
         os.chdir(librariesPath)
         os.chdir(item)
         printer.printSetupInfo(item)
-      
         
     def uploadSketch(self):
         state = helper.timeout_command("scons upload", 10)
@@ -130,3 +180,31 @@ class TestSuite:
             return True
         else:
             return False
+        
+    #def debug(self):
+
+
+class Test:
+    def __init__(self, path):
+        self.path = path
+
+suite = TestSuite()
+printer = InfoPrinter()
+helper = Helper()
+
+distanceTest= Test("DistanceSensor/examples/GP2Y0A21YK/TestSuite/")
+moduleTest= Test("LT_Module/examples/TestSuite/")
+
+testList = [distanceTest, moduleTest ]
+
+def main(argv=None):
+    initSerialPort()
+    #suite.debug()
+    suite.printPlannedTests()
+    suite.runTests()
+    suite.printSummary()
+    #suite.report()
+
+
+if __name__ == "__main__":
+    sys.exit(main())
