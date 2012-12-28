@@ -38,9 +38,6 @@ Upload succesfull
 Running test suite...
 Tests run: 3 Successful: 3 Failed: 0
 
-Running test suite...
-Tests run: 3 Successful: 3 Failed: 0
-
 =============================================================
 Starting test: My_Module/examples/TestSuite/
 -------------------------------------------------------------
