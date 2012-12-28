@@ -28,10 +28,10 @@ import subprocess
 
 class InfoPrinter:
     def printMarker1(self):
-        print ('===================================================================')
+        print ('=============================================================')
 
     def printMarker2(self):
-        print ('-------------------------------------------------------------------')
+        print ('-------------------------------------------------------------')
 
     def printProgramFlow(self):
         print ('')
@@ -44,11 +44,10 @@ class InfoPrinter:
         print ('')
         self.printMarker1()
         print ('Planned tests:')
-        
+
     def printSetupInfo(self, item):
         print ('')
         self.printMarker1()
-        print ('Starting test: ' + item )
+        print ('Starting test: ' + item)
         self.printMarker2()
         print ('Uploading sketch to Arduino...')
-

@@ -37,47 +37,44 @@ librariesPath = "/usr/share/arduino/libraries"
 printer = InfoPrinter()
 helper = TestHelper()
 
+
 def initSerialPort():
     global ser
     ser = serial.Serial(DEFAULT_PORT, DEFAULT_BAUDRATE)
     ser.flush()
+
 
 class TestSuite:
     notFinished = True    # boolean value
     uploadFinished = False
     FailedTestList = []
     PassedTestList = []
-    failureCount= 0
+    failureCount = 0
     line = []
-    testList =[]
+    testList = []
 
-    
     def __init__(self, testList):
         self.testList = testList
         initSerialPort()
-        
-        
+
     def printPlannedTests(self):
         printer.printTop()
         for index, item in enumerate(self.testList):
             print (item.path)
         printer.printProgramFlow()
 
-    
     def runTests(self):
         for index, item in enumerate(self.testList):
             print (item.path)
             self.setUp(item.path)
             self.uploadSketch()
             self.analyzeOutput(item.path)
-        
-        
+
     def setUp(self, item):
         os.chdir(librariesPath)
         os.chdir(item)
         printer.printSetupInfo(item)
-      
-        
+
     def uploadSketch(self):
         state = helper.timeout_command("scons upload", 10)
         if (state == 0):
@@ -86,9 +83,8 @@ class TestSuite:
             #print('.', end="")
         else:
             self.uploadFinished = False
-            print ('Upload Failed')   
-            
-              
+            print ('Upload Failed')
+
     def analyzeOutput(self, item):
         while self.notFinished:
             self.readLine()
@@ -98,8 +94,8 @@ class TestSuite:
             self.PassedTestList.append(item)
         else:
             self.FailedTestList.append(item)
-            self.failureCount = self.failureCount+1
-            
+            self.failureCount = self.failureCount + 1
+
     def readLine(self):
         try:
             self.line = ser.readline().decode('utf-8')[:-1]
@@ -108,7 +104,7 @@ class TestSuite:
             print ('unexpectedly lost serial connection')
         if(self.line.find("Tests run:") == 0):
             self.notFinished = False
-                
+
     def printSummary(self):
         print ('')
         printer.printMarker1()
@@ -123,10 +119,9 @@ class TestSuite:
             print (' ' + str(index + 1) + '.' + item)
         printer.printMarker1()
         print ('')
-        
-        
+
     def report(self):
         if (self.failureCount == 0):
-            return True
+            return 0
         else:
-            return False
+            return 42

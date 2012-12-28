@@ -24,17 +24,18 @@ import serial
 import time
 import os
 import subprocess
+import datetime
+import signal
 
 
 class TestHelper:
     def timeout_command(self, command, timeout):
         #"""call shell-command and either return its output or kill it
         #if it doesn't normally exit within timeout seconds and return None"""
-        import subprocess, datetime, os, time, signal
 
         cmd = command.split(" ")
         start = datetime.datetime.now()
-        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, \
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE,
           stderr=subprocess.PIPE)
 
         while process.poll() is None:

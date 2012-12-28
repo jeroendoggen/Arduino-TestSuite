@@ -7,12 +7,13 @@
 #  - Version 0.1: call scons
 #                 run unit test
 #                 print summary
-#                 
+#
 #  - Version 0.2: subprocess for arscons
 #                 classes: Test, TestSuite, InfoPrinter
 #                 Divided the code in several modules
 #
 # Roadmap:
+#  - report failed uploads, skip further testing?
 #  - accept commandline parameters (options, silent, debug,..)
 #  - logging to a file
 #  - what to to when arscons fails? (how to report?)
@@ -48,20 +49,20 @@ ser = ""
 
 librariesPath = "/usr/share/arduino/libraries"
 
-distanceTest= Test("DistanceSensor/examples/GP2Y0A21YK/TestSuite/")
-moduleTest= Test("LT_Module/examples/TestSuite/")
+distanceTest = Test("DistanceSensor/examples/GP2Y0A21YK/TestSuite/")
+moduleTest = Test("LT_Module/examples/TestSuite/")
 
-testList = [distanceTest, moduleTest ]
+testList = [distanceTest, moduleTest]
+#testList = [distanceTest]
 
 suite = TestSuite(testList)
-
 
 
 def main(argv=None):
     suite.printPlannedTests()
     suite.runTests()
     suite.printSummary()
-    #suite.report()
+    return(suite.report())
 
 
 if __name__ == "__main__":
