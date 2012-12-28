@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Arduino TestSuite to automate unit tests on the Arduino platform
 # Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
@@ -18,12 +18,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA  02110-1301, USA.
-
-import sys
-import serial
-import time
-import os
-import subprocess
 
 
 class InfoPrinterHelper:
