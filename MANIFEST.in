@@ -1,0 +1,4 @@
+include *.txt
+recursive-include ArduinoTestSuite *.txt *.py
+recursive-exclude ArduinoTestSuite *.pyc
+prune examples/sample?/build

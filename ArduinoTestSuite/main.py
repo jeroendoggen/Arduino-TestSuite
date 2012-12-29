@@ -35,8 +35,8 @@
 
 import sys
 
-from test import Test
-from testSuite import TestSuite
+from ArduinoTestSuite.test import Test
+from ArduinoTestSuite.testSuite import TestSuite
 
 distanceTest = Test("DistanceSensor/examples/GP2Y0A21YK/TestSuite/")
 moduleTest = Test("LT_Module/examples/TestSuite/")
@@ -47,7 +47,7 @@ testList = [distanceTest, moduleTest]
 suite = TestSuite(testList)
 
 
-def main(argv=None):
+def run(argv=None):
     suite.printPlannedTests()
     suite.runTests()
     suite.printSummary()
@@ -55,4 +55,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run())

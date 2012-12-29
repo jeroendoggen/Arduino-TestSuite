@@ -23,8 +23,8 @@ import serial
 import os
 import time
 
-from infoPrinter import InfoPrinter
-from testHelper import TestHelper
+from ArduinoTestSuite.infoPrinter import InfoPrinter
+from ArduinoTestSuite.testHelper import TestHelper
 
 DEFAULT_PORT = "/dev/ttyUSB0"
 DEFAULT_BAUDRATE = 9600
