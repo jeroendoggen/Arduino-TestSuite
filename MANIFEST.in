@@ -1,5 +1,5 @@
 include *.txt
 include COPYING
-recursive-include ArduinoTestSuite *.txt *.py
+recursive-include ArduinoTestSuite *.txt *.py *.conf
 recursive-exclude ArduinoTestSuite *.pyc
 prune examples/sample?/build

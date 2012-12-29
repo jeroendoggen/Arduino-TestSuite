@@ -6,6 +6,7 @@ ArduinoTestSuite/__init__.py
 ArduinoTestSuite/__main__.py
 ArduinoTestSuite/infoPrinter.py
 ArduinoTestSuite/main.py
+ArduinoTestSuite/planned-tests.conf
 ArduinoTestSuite/settings.py
 ArduinoTestSuite/test.py
 ArduinoTestSuite/testHelper.py
