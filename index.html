@@ -32,14 +32,19 @@
 
 <h2>Python Script to automate Arduino Unit Tests</h2>
 
-<ul>
-<li>The unit tests are written with the "Arduino Unit Testing Library": <a href="http://code.google.com/p/arduinounit">http://code.google.com/p/arduinounit</a>
-</li>
-<li>The tests also use "Arduino Unit Testing Helper Library": <a href="http://code.google.com/p/arduino-unit-test-helper-library">http://code.google.com/p/arduino-unit-test-helper-library</a>
-</li>
-<li>The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": <a href="http://github.com/suapapa/arscons">http://github.com/suapapa/arscons</a>
-</li>
-</ul><h2>Installation:</h2>
+<p>This Python scripts allows automated running of several Arduino unit tests.
+The testing process is started on the PC but the tests run on the actual Arduino hardware.
+One set of unit tests is typically used to test one Arduino library.</p>
+
+<p>The following steps are performed for each set of unit tests:</p>
+
+<ol>
+<li>The scipts compiles and uploads a sketch that contains the unit testing code to the Arduino board.</li>
+<li>The unit test are run on the Arduino board.</li>
+<li>The results of the test are printed over the serial port and analyzed by this Python scripts</li>
+<li>The script start the next test. Steps 1,2 and 3 are repeated for all the libraries that you are using in the project.
+The script prints a summary showing an overview of the failed/passed test in the complete testsuite.</li>
+</ol><h2>Installation:</h2>
 
 <ul>
 <li>Downloads source and run "python setup.py install"</li>
@@ -50,19 +55,16 @@
 <ul>
 <li>Start the program with: "python -m ArduinoTestSuite" (or python main.py)</li>
 <li>Selecting the tests you want to run, configuring Arduino path and configuring the serial port is currently done by editing "main.py" and "testSuite.py"</li>
-</ul><h2>Program Flow:</h2>
+</ul><h2>References</h2>
 
-<p>These steps are performed for each set of unit tests (typically to test one Arduino library)</p>
-
-<ol>
-<li>Compile a sketch that runs several unit tests</li>
-<li>Upload and run the sketch using Arscons</li>
-<li>Check unit test output</li>
-</ol><p>Steps 1,2 and 3 are repeated for all the libraries that you are using in the project.</p>
-
-<p>The script prints a summary showing an overview of the failed/passed test in the complete testsuite.</p>
-
-<h2>Typical Output:</h2>
+<ul>
+<li>The unit tests are written with the "Arduino Unit Testing Library": <a href="http://code.google.com/p/arduinounit">http://code.google.com/p/arduinounit</a>
+</li>
+<li>The tests also use "Arduino Unit Testing Helper Library": <a href="http://code.google.com/p/arduino-unit-test-helper-library">http://code.google.com/p/arduino-unit-test-helper-library</a>
+</li>
+<li>The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": <a href="http://github.com/suapapa/arscons">http://github.com/suapapa/arscons</a>
+</li>
+</ul><h2>Typical Output:</h2>
 
 <p>Two Arduino libraries are tested, one passes, one fails.</p>
 
