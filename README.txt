@@ -25,3 +25,11 @@ References
  * The unit tests are written with the "Arduino Unit Testing Library": http://code.google.com/p/arduinounit
  * The tests also use "Arduino Unit Testing Helper Library": http://code.google.com/p/arduino-unit-test-helper-library
  * The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": http://github.com/suapapa/arscons
+
+Known issues:
+-------------
+ * Does not work with Python3 (because of Scons)
+
+Bug reports:
+------------
+ * Jeroen Doggen <jeroendoggen@gmail.com>

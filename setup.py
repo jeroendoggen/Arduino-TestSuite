@@ -1,10 +1,13 @@
 from distutils.core import setup
 
+from ArduinoTestSuite import __version__
+
+
 with open('README.txt') as file:
     long_description = file.read()
 
 setup(name='ArduinoTestSuite',
-      version='0.2b',
+      version=__version__,
       description='Arduino TestSuite for automated Arduino Unit Testing',
       long_description=long_description,
       author='Jeroen Doggen',
