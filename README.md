@@ -1,13 +1,26 @@
 Arduino TestSuite
------------------
+=================
 
-### Python Script to automate Arduino Unit Tests
+Python Script to automate Arduino Unit Tests
+--------------------------------------------
 
  * The unit tests are written with the "Arduino Unit Testing Library": http://code.google.com/p/arduinounit
  * The tests also use "Arduino Unit Testing Helper Library": http://code.google.com/p/arduino-unit-test-helper-library
  * The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": http://github.com/suapapa/arscons
 
-### Program Flow: 
+Installation:
+-------------
+ * Downloads source and run "python setup.py install"
+ * Python Package available in the Python Package Index at: http://pypi.python.org/pypi/ArduinoTestSuite/ ("pip install ArduinoTestSuite")
+ * Currently only tested on Linux (serial port is hardcoded, subprocess handling only works on Linux)
+
+Usage:
+------
+ * Start the program with: "python -m ArduinoTestSuite" (or python main.py)
+ * Selecting the tests you want to run, configuring Arduino path and configuring the serial port is currently done by editing "main.py" and "testSuite.py"
+
+Program Flow:
+------------
 These steps are performed for each set of unit tests (typically to test one Arduino library)
    1. Compile a sketch that runs several unit tests
    2. Upload and run the sketch using Arscons
@@ -17,7 +30,10 @@ Steps 1,2 and 3 are repeated for all the libraries that you are using in the pro
 
 The script prints a summary showing an overview of the failed/passed test in the complete testsuite.
 
-### Typical Output:
+Typical Output:
+---------------
+Two Arduino libraries are tested, one passes, one fails.
+
 ````
 =============================================================
 Planned tests:
