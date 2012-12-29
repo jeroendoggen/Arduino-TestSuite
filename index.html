@@ -28,9 +28,9 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h2>Arduino TestSuite</h2>
+          <h1>Arduino TestSuite</h1>
 
-<h3>Python Script to automate Arduino Unit Tests</h3>
+<h2>Python Script to automate Arduino Unit Tests</h2>
 
 <ul>
 <li>The unit tests are written with the "Arduino Unit Testing Library": <a href="http://code.google.com/p/arduinounit">http://code.google.com/p/arduinounit</a>
@@ -39,7 +39,18 @@
 </li>
 <li>The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": <a href="http://github.com/suapapa/arscons">http://github.com/suapapa/arscons</a>
 </li>
-</ul><h3>Program Flow:</h3>
+</ul><h2>Installation:</h2>
+
+<ul>
+<li>Downloads source and run "python setup.py install"</li>
+<li>Python Package available in the Python Package Index at: <a href="http://pypi.python.org/pypi/ArduinoTestSuite/">http://pypi.python.org/pypi/ArduinoTestSuite/</a> ("pip install ArduinoTestSuite")</li>
+<li>Currently only tested on Linux (serial port is hardcoded, subprocess handling only works on Linux)</li>
+</ul><h2>Usage:</h2>
+
+<ul>
+<li>Start the program with: "python -m ArduinoTestSuite" (or python main.py)</li>
+<li>Selecting the tests you want to run, configuring Arduino path and configuring the serial port is currently done by editing "main.py" and "testSuite.py"</li>
+</ul><h2>Program Flow:</h2>
 
 <p>These steps are performed for each set of unit tests (typically to test one Arduino library)</p>
 
@@ -51,7 +62,9 @@
 
 <p>The script prints a summary showing an overview of the failed/passed test in the complete testsuite.</p>
 
-<h3>Typical Output:</h3>
+<h2>Typical Output:</h2>
+
+<p>Two Arduino libraries are tested, one passes, one fails.</p>
 
 <pre><code>=============================================================
 Planned tests:
