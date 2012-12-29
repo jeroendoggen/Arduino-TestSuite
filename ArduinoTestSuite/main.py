@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # Arduino TestSuite to automate unit tests on the Arduino platform
 # Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
@@ -14,7 +14,7 @@
 #
 #  - Version 0.2.1: Passing cli arguments & cli help messages
 #                   Settings separated from other code
-#                   Start test from config file
+#                   Start tests from config file
 #
 # Roadmap:
 #  - report failed uploads, skip further testing?
