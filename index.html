@@ -49,12 +49,13 @@ The script prints a summary showing an overview of the failed/passed test in the
 <ul>
 <li>Downloads source and run "python setup.py install"</li>
 <li>Python Package available in the Python Package Index at: <a href="http://pypi.python.org/pypi/ArduinoTestSuite/">http://pypi.python.org/pypi/ArduinoTestSuite/</a> ("pip install ArduinoTestSuite")</li>
-<li>Currently only tested on Linux (serial port is hardcoded, subprocess handling only works on Linux)</li>
+<li>Currently only tested on Linux (subprocess handling only works on Linux)</li>
 </ul><h2>Usage:</h2>
 
 <ul>
 <li>Start the program with: "python -m ArduinoTestSuite" (or python main.py)</li>
-<li>Selecting the tests you want to run, configuring Arduino path and configuring the serial port is currently done by editing "main.py" and "testSuite.py"</li>
+<li>Select the tests you want to run by editing: "planned-tests.conf"</li>
+<li>Other configuration options: "python -m ArduinoTestSuite --help"</li>
 </ul><h2>References</h2>
 
 <ul>
@@ -66,7 +67,7 @@ The script prints a summary showing an overview of the failed/passed test in the
 </li>
 </ul><h2>Typical Output:</h2>
 
-<p>Two Arduino libraries are tested, one passes, one fails.</p>
+<p>In this examples, two Arduino libraries are tested, one passes, one fails.</p>
 
 <pre><code>=============================================================
 Planned tests:
