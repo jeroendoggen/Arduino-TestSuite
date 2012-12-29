@@ -12,9 +12,12 @@
 #                 classes: Test, TestSuite, InfoPrinter
 #                 Divided the code in several modules
 #
+#  - Version 0.2.1: Passing cli arguments & cli help messages
+#                   Settings separated from other code
+#                   Start test from config file
+#
 # Roadmap:
 #  - report failed uploads, skip further testing?
-#  - accept commandline parameters (options, silent, debug,..)
 #  - logging to a file
 #  - what to to when arscons fails? (how to report?)
 #
@@ -38,13 +41,7 @@ import sys
 from ArduinoTestSuite.test import Test
 from ArduinoTestSuite.testSuite import TestSuite
 
-distanceTest = Test("DistanceSensor/examples/GP2Y0A21YK/TestSuite/")
-moduleTest = Test("LT_Module/examples/TestSuite/")
-
-testList = [distanceTest, moduleTest]
-#testList = [distanceTest]
-
-suite = TestSuite(testList)
+suite = TestSuite()
 
 
 def run(argv=None):

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # Arduino TestSuite to automate unit tests on the Arduino platform
 # Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
@@ -19,27 +19,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA  02110-1301, USA.
 
-import serial
 import os
 import time
+import argparse
 
 from ArduinoTestSuite.infoPrinter import InfoPrinter
 from ArduinoTestSuite.testHelper import TestHelper
+from ArduinoTestSuite.settings import Settings
 
-DEFAULT_PORT = "/dev/ttyUSB0"
-DEFAULT_BAUDRATE = 9600
-ser = ""
 
 librariesPath = "/usr/share/arduino/libraries"
 
 printer = InfoPrinter()
 helper = TestHelper()
-
-
-def initSerialPort():
-    global ser
-    ser = serial.Serial(DEFAULT_PORT, DEFAULT_BAUDRATE)
-    ser.flush()
 
 
 class TestSuite:
@@ -50,19 +42,21 @@ class TestSuite:
     failureCount = 0
     line = []
     testList = []
+    config = Settings()
 
-    def __init__(self, testList):
-        self.testList = testList
-        initSerialPort()
+    def __init__(self):
+        self.config.getCliArguments()
+        self.testList = self.config.readConfigfile()
+        self.ser = self.config.initSerialPort()
 
     def printPlannedTests(self):
         printer.plannedTests(self.testList)
 
     def runTests(self):
         for index, test in enumerate(self.testList):
-            self.setUp(test.path)
+            self.setUp(test)
             self.uploadSketch()
-            self.analyzeOutput(test.path)
+            self.analyzeOutput(test)
 
     def setUp(self, item):
         os.chdir(librariesPath)
@@ -86,7 +80,7 @@ class TestSuite:
 
     def readLine(self):
         try:
-            self.line = ser.readline().decode('utf-8')[:-1]
+            self.line = self.ser.readline().decode('utf-8')[:-1]
             print (self.line)
         except:
             print ("unexpectedly lost serial connection")

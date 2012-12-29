@@ -50,7 +50,7 @@ class InfoPrinter:
         for index, item in enumerate(testList):
             print (index + 1, end="")
             print (". ", end="")
-            print (item.path)
+            print (item)
         self.helper.printProgramFlow()
 
     def printSetupInfo(self, item):
