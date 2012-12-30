@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Arduino TestSuite : Python Script to automate Arduino Unit Tests" />
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Arduino TestSuite by jeroendoggen</title>
+    <title>Arduino TestSuite</title>
   </head>
 
   <body>
-    <header>
-      <div class="inner">
-        <h1>Arduino TestSuite</h1>
-        <h2>Python Script to automate Arduino Unit Tests</h2>
-        <a href="https://github.com/jeroendoggen/Arduino-TestSuite" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>Arduino TestSuite: Python Script to automate Arduino Unit Tests</h1>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jeroendoggen/Arduino-TestSuite">View on GitHub</a>
 
-<p>This Python scripts allows automated running of several Arduino unit tests.
+          <h1 id="project_title">Arduino TestSuite</h1>
+          <h2 id="project_tagline">Python Script to automate Arduino Unit Tests</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jeroendoggen/Arduino-TestSuite/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jeroendoggen/Arduino-TestSuite/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>This Python scripts allows automated running of several Arduino unit tests.
 The testing process is started on the PC but the tests run on the actual Arduino hardware.
 One set of unit tests is typically used to test one Arduino library.</p>
 
@@ -45,16 +46,19 @@ The script prints a summary showing an overview of all the failed/passed tests i
 </ol><h2>Installation:</h2>
 
 <ul>
-<li>Downloads source and run "python setup.py install"</li>
-<li>Python Package available in the Python Package Index at: <a href="http://pypi.python.org/pypi/ArduinoTestSuite/">http://pypi.python.org/pypi/ArduinoTestSuite/</a> ("pip install ArduinoTestSuite")</li>
-<li>Currently only tested on Linux (subprocess handling only works on Linux)</li>
+<li>Downloads source and run <code>python setup.py install</code>
+</li>
+<li>Python Package available in the Python Package Index at: <a href="http://pypi.python.org/pypi/ArduinoTestSuite/">http://pypi.python.org/pypi/ArduinoTestSuite/</a> (<code>pip install ArduinoTestSuite</code>)</li>
 </ul><h2>Usage:</h2>
 
 <ul>
-<li>Start the program with: "python -m ArduinoTestSuite" (or python main.py)</li>
-<li>Select the tests you want to run by editing: "planned-tests.conf"</li>
-<li>Other configuration options: "python -m ArduinoTestSuite --help"</li>
-</ul><h2>References</h2>
+<li>Start the program with: <code>python -m ArduinoTestSuite</code> (or <code>python main.py</code>)</li>
+<li>Select the tests you want to run by editing: <code>planned-tests.conf</code>
+</li>
+<li>Getting help: <code>python -m ArduinoTestSuite --help</code>
+</li>
+<li>Post issues to GitHub <a href="http://github.com/jeroendoggen/Arduino-TestSuite/issues">http://github.com/jeroendoggen/Arduino-TestSuite/issues</a>.</li>
+</ul><h2>Requirements:</h2>
 
 <ul>
 <li>The unit tests are written with the "Arduino Unit Testing Library": <a href="http://code.google.com/p/arduinounit">http://code.google.com/p/arduinounit</a>
@@ -63,7 +67,24 @@ The script prints a summary showing an overview of all the failed/passed tests i
 </li>
 <li>The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": <a href="http://github.com/suapapa/arscons">http://github.com/suapapa/arscons</a>
 </li>
-</ul><h2>Typical Output:</h2>
+<li>Python 2.6+ packages: pyserial</li>
+</ul><h2>Limitations:</h2>
+
+<ul>
+<li>Currently only tested on Linux
+
+<ul>
+<li>Default paths are configured for Linux</li>
+<li>Subprocess handling only works on Linux</li>
+</ul>
+</li>
+<li>The program was created with other OS users in mind, so it will eventually get full cross-platform support. Help from Windows-developers is much appreciated.</li>
+</ul><h2>License:</h2>
+
+<p>If not stated otherwise ArduinoTestSuite is distributed in terms of the GPLv2 software license.
+See COPYING in the distribution for details.</p>
+
+<h2>Typical Output:</h2>
 
 <p>In this examples, two Arduino libraries are tested, one passes, one fails.</p>
 
@@ -104,26 +125,40 @@ Passed tests:
  1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
 =============================================================
 </code></pre>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/jeroendoggen/Arduino-TestSuite/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/jeroendoggen/Arduino-TestSuite/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+<h2>Changelog:</h2>
 
-          <p class="repo-owner"><a href="https://github.com/jeroendoggen/Arduino-TestSuite"></a> is maintained by <a href="https://github.com/jeroendoggen">jeroendoggen</a>.</p>
+<p>0.2.1: Settings &amp; configuration</p>
 
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+<ul>
+<li>Passing cli arguments &amp; cli help messages</li>
+<li>Settings separated from other code</li>
+<li>Start tests from config file</li>
+</ul><p>0.2: First working OOP version</p>
+
+<ul>
+<li>Subprocess for arscons</li>
+<li>Classes: Test, TestSuite, InfoPrinter</li>
+<li>Divided the code in several modules</li>
+</ul><p>0.1: Initial release:</p>
+
+<ul>
+<li>Call scons</li>
+<li>Run unit test</li>
+<li>Print summary</li>
+</ul>
+      </section>
     </div>
 
-            <script type="text/javascript">
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Arduino TestSuite maintained by <a href="https://github.com/jeroendoggen">jeroendoggen</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -133,6 +168,7 @@ Passed tests:
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
