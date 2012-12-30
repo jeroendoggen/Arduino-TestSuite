@@ -14,15 +14,15 @@ The following steps are performed for each set of unit tests:
 
 Installation:
 -------------
- * Downloads source and run "python setup.py install"
- * Python Package available in the Python Package Index at: http://pypi.python.org/pypi/ArduinoTestSuite/ ("pip install ArduinoTestSuite")
+ * Downloads source and run ``python setup.py install``
+ * Python Package available in the Python Package Index at: http://pypi.python.org/pypi/ArduinoTestSuite/ (``pip install ArduinoTestSuite``)
  * Currently only tested on Linux (subprocess handling only works on Linux)
 
 Usage:
 ------
- * Start the program with: "python -m ArduinoTestSuite" (or python main.py)
- * Select the tests you want to run by editing: "planned-tests.conf"
- * Other configuration options: "python -m ArduinoTestSuite --help"
+ * Start the program with: ``python -m ArduinoTestSuite`` (or ``python main.py``)
+ * Select the tests you want to run by editing: ``planned-tests.conf``
+ * Other configuration options: ``python -m ArduinoTestSuite --help``
 
 References
 ----------
