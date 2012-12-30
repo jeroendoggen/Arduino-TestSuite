@@ -28,9 +28,7 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1>Arduino TestSuite</h1>
-
-<h2>Python Script to automate Arduino Unit Tests</h2>
+          <h1>Arduino TestSuite: Python Script to automate Arduino Unit Tests</h1>
 
 <p>This Python scripts allows automated running of several Arduino unit tests.
 The testing process is started on the PC but the tests run on the actual Arduino hardware.
@@ -39,11 +37,11 @@ One set of unit tests is typically used to test one Arduino library.</p>
 <p>The following steps are performed for each set of unit tests:</p>
 
 <ol>
-<li>The scipts compiles and uploads a sketch that contains the unit testing code to the Arduino board.</li>
-<li>The unit test are run on the Arduino board.</li>
-<li>The results of the test are printed over the serial port and analyzed by this Python scripts</li>
-<li>The script start the next test. Steps 1,2 and 3 are repeated for all the libraries that you are using in the project.
-The script prints a summary showing an overview of the failed/passed test in the complete testsuite.</li>
+<li>The script compiles and uploads an Arduino sketch that contains the unit testing.</li>
+<li>The unit tests are run on the Arduino board.</li>
+<li>The results of the test are printed over the serial port and analyzed by the Python script.</li>
+<li>The script starts the next test, repeating steps 1,2 and 3 for all test that are requested in the configuration file.
+The script prints a summary showing an overview of all the failed/passed tests in the complete testsuite.</li>
 </ol><h2>Installation:</h2>
 
 <ul>
