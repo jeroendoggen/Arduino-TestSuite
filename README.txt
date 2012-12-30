@@ -1,18 +1,16 @@
-Arduino TestSuite
-=================
+Arduino TestSuite: Python Script to automate Arduino Unit Tests
+===============================================================
 
-Python Script to automate Arduino Unit Tests
---------------------------------------------
 This Python scripts allows automated running of several Arduino unit tests.
 The testing process is started on the PC but the tests run on the actual Arduino hardware.
 One set of unit tests is typically used to test one Arduino library.
 
 The following steps are performed for each set of unit tests:
- 1. The scipts compiles and uploads a sketch that contains the unit testing code to the Arduino board.
- 2. The unit test are run on the Arduino board.
- 3. The results of the test are printed over the serial port and analyzed by this Python scripts
- 4. The script start the next test. Steps 1,2 and 3 are repeated for all the libraries that you are using in the project.
-  The script prints a summary showing an overview of the failed/passed test in the complete testsuite.
+ 1. The script compiles and uploads an Arduino sketch that contains the unit testing.
+ 2. The unit tests are run on the Arduino board.
+ 3. The results of the test are printed over the serial port and analyzed by the Python script.
+ 4. The script starts the next test, repeating steps 1,2 and 3 for all test that are requested in the configuration file.
+  The script prints a summary showing an overview of all the failed/passed tests in the complete testsuite.
 
 Usage:
 ------
