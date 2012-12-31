@@ -57,10 +57,10 @@ The script prints a summary showing an overview of all the failed/passed tests i
 </ul><h2>Usage:</h2>
 
 <ul>
-<li>Start the program with: <code>python -m ArduinoTestSuite</code> (or <code>python main.py</code>)</li>
+<li>Start the program with: <code>python -m arduino_testsuite</code> (or <code>python main.py</code>)</li>
 <li>Select the tests you want to run by editing: <code>planned-tests.conf</code>
 </li>
-<li>Getting help: <code>python -m ArduinoTestSuite --help</code>
+<li>Getting help: <code>python -m arduino_testsuite --help</code>
 </li>
 <li>Post issues to GitHub <a href="http://github.com/jeroendoggen/Arduino-TestSuite/issues">http://github.com/jeroendoggen/Arduino-TestSuite/issues</a>.</li>
 </ul><h2>Requirements:</h2>
@@ -97,7 +97,14 @@ See COPYING in the distribution for details.</p>
 </li>
 </ul><h2>Changelog:</h2>
 
-<p>0.2.1: Settings &amp; configuration</p>
+<p>0.2.2: Error handling:</p>
+
+<ul>
+<li>Compile &amp; upload errors</li>
+<li>Timing: timeout for uploading &amp; running of the tests</li>
+<li>Missing files: wrong test folder, no config file</li>
+<li>Hardware: Disconnect Arduino during test</li>
+</ul><p>0.2.1: Settings &amp; configuration</p>
 
 <ul>
 <li>Passing cli arguments &amp; cli help messages</li>
