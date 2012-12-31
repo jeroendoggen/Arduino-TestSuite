@@ -13,8 +13,9 @@ The following steps are performed for each set of unit tests:
 
 Installation:
 -------------
- * Downloads source and run ``python setup.py install``
- * Python Package available in the Python Package Index at: http://pypi.python.org/pypi/ArduinoTestSuite/ (``pip install ArduinoTestSuite``)
+ * Download the source and run ``python setup.py install``
+ * Python Package available in the Python Package Index at: http://pypi.python.org/pypi/arduino_testsuite
+ * Install using pip: ``pip install ArduinoTestSuite``
 
 Usage:
 ------
