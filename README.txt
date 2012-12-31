@@ -9,7 +9,7 @@ The following steps are performed for each set of unit tests:
  2. The unit tests are run on the Arduino board.
  3. The results of the test are printed over the serial port and analyzed by the Python script.
  4. The script starts the next test, repeating steps 1,2 and 3 for all test that are requested in the configuration file.
-  The script prints a summary showing an overview of all the failed/passed tests in the complete testsuite.
+    The script prints a summary showing an overview of all the failed/passed tests in the complete testsuite.
 
 Installation:
 -------------
@@ -33,8 +33,10 @@ Requirements:
 Limitations:
 ------------
  * Currently only tested on Linux
+
   * Default paths are configured for Linux
   * Subprocess handling only works on Linux
+
  * The program was created with other OS users in mind, so it will eventually get full cross-platform support. Help from Windows-developers is much appreciated.
 
 License:
