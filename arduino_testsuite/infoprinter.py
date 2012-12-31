@@ -76,8 +76,8 @@ class InfoPrinter:
         self.helper.printMarker1()
         print ("")
 
-    def uploadStatus(self, state):
-        if (state == 0):
+    def uploadStatus(self, uploadStatus):
+        if (uploadStatus == 0):
             self.uploadFinished = True
             print ("Upload succesfull")
             #print(".", end="")

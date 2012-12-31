@@ -25,10 +25,12 @@ from arduino_testsuite.testsuite import TestSuite
 
 suite = TestSuite()
 
+timeout = 10
+
 
 def run(argv=None):
     suite.printPlannedTests()
-    suite.runTests()
+    suite.runTests(timeout)
     suite.printSummary()
     return(suite.report())
 

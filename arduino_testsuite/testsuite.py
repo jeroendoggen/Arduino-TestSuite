@@ -18,10 +18,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA  02110-1301, USA.
+from __future__ import print_function, division  # We require Python 2.6+
 
 import os
 import time
 import argparse
+import datetime
 
 from arduino_testsuite.infoprinter import InfoPrinter
 from arduino_testsuite.testhelper import TestHelper
@@ -37,7 +39,7 @@ helper = TestHelper()
 class TestSuite:
     notFinished = True    # boolean value
     foundTestPath = False
-    uploadFinished = False
+    uploadStatus = False
     FailedTestList = []
     PassedTestList = []
     failureCount = 0
@@ -53,51 +55,65 @@ class TestSuite:
     def printPlannedTests(self):
         printer.plannedTests(self.testList)
 
-    def runTests(self):
-        for index, test in enumerate(self.testList):
-            self.setUp(test)
+    def runTests(self, timeout):
+        for index, currentTest in enumerate(self.testList):
+            self.setUp(currentTest)
             if (self.foundTestPath):
-                self.uploadSketch()
-                self.analyzeOutput(test)
                 self.foundTestPath = False
+                print("Starting upload...")
+                self.uploadSketch(timeout)
+                if (self.uploadStatus == 0):
+                    print("Start tests...")
+                    self.analyzeOutput(timeout, currentTest)
+                else:
+                    self.addToFailedList(currentTest)
 
-    def setUp(self, item):
-        printer.printSetupInfo(item)
+    def setUp(self, currentTest):
+        printer.printSetupInfo(currentTest)
         try:
             os.chdir(scriptPath)
         except OSError:
             print("Error: unable to open the script folder")
             print("This should never happen...")
         try:
-            os.chdir(item)
+            os.chdir(currentTest)
             self.foundTestPath = True
         except OSError:
             print("Error: unable to open test folder")
             print("Check your config file")
             self.foundTestPath = False
-            self.FailedTestList.append(item)
+            self.addToFailedList(currentTest)
 
-    def uploadSketch(self):
-        state = helper.timeout_command("scons upload", 10)
-        printer.uploadStatus(state)
+    def uploadSketch(self, timeout):
+        self.uploadStatus = helper.timeout_command("scons upload", timeout)
+        printer.uploadStatus(self.uploadStatus)
 
-    def analyzeOutput(self, item):
+    def analyzeOutput(self, timeout, currentTest):
+        start = datetime.datetime.now()
         while self.notFinished:
-            self.readLine()
+            self.readLine(currentTest)
             time.sleep(0.1)
+            now = datetime.datetime.now()
+            if (now - start).seconds > timeout:
+                print ("Test timeout after ", end="")
+                print (timeout, end="")
+                print (" seconds")
+                self.notFinished = False
         self.notFinished = True   # to allow the next test to start
         if (self.line[11] == self.line[25]):
-            self.PassedTestList.append(item)
+            if currentTest not in self.FailedTestList:
+                self.addToPassedList(currentTest)
         else:
-            self.FailedTestList.append(item)
+            self.FailedTestList.append(currentTest)
             self.failureCount = self.failureCount + 1
 
-    def readLine(self):
+    def readLine(self, currentTest):
         try:
             self.line = self.ser.readline().decode('utf-8')[:-1]
             print (self.line)
         except:
             print ("unexpectedly lost serial connection")
+            self.addToFailedList(currentTest)
         if(self.line.find("Tests run:") == 0):
             self.notFinished = False
 
@@ -106,3 +122,9 @@ class TestSuite:
 
     def report(self):
         return(helper.report(self.failureCount))
+
+    def addToFailedList(self, currentTest):
+        self.FailedTestList.append(currentTest)
+
+    def addToPassedList(self, currentTest):
+        self.PassedTestList.append(currentTest)

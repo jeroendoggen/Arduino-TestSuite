@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA  02110-1301, USA.
 
+from __future__ import print_function, division  # We require Python 2.6+
+
 import time
 import os
 import subprocess
@@ -37,13 +39,13 @@ class TestHelper:
           stderr=subprocess.PIPE)
 
         while process.poll() is None:
-            time.sleep(1)
             now = datetime.datetime.now()
+            time.sleep(1)
             if (now - start).seconds > timeout:
+                print ("Process timeout")
                 os.kill(process.pid, signal.SIGKILL)
                 os.waitpid(-1, os.WNOHANG)
                 return None
-
         return process.poll()
 
     def report(self, failureCount):
