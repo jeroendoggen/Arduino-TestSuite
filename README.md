@@ -19,9 +19,9 @@ Installation:
 
 Usage:
 ------
- * Start the program with: ``python -m ArduinoTestSuite`` (or ``python main.py``)
+ * Start the program with: ``python -m arduino_testsuite`` (or ``python main.py``)
  * Select the tests you want to run by editing: ``planned-tests.conf``
- * Getting help: ``python -m ArduinoTestSuite --help``
+ * Getting help: ``python -m arduino_testsuite --help``
  * Post issues to GitHub <http://github.com/jeroendoggen/Arduino-TestSuite/issues>.
 
 Requirements:
