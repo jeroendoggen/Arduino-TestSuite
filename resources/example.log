@@ -1,0 +1,96 @@
+
+=============================================================
+Planned tests:
+ 1. examples/floatingPin
+ 2. examples/inInterval
+ 3. examples/simpleTest
+ 4. examples/buildErrorTest
+ 5. examples/nonExistingFolder
+ 6. examples/slowTest
+ 7. examples/verySlowTest
+
+Program flow: 
+ 1. Compile TestSuite sketch
+ 2. Upload sketch using Arscons
+ 3. Check unit test output
+
+=============================================================
+Starting test: examples/floatingPin
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Starting upload...
+Upload succesfull
+Start tests...
+Running test suite...
+Assertion failed in 'floatingInputPin' on line 6
+Tests run: 1 Successful: 0 Failed: 1
+
+=============================================================
+Starting test: examples/inInterval
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Starting upload...
+Upload succesfull
+Start tests...
+Running test suite 'In Interval'...
+Tests run: 1 Successful: 1 Failed: 0
+
+=============================================================
+Starting test: examples/simpleTest
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Starting upload...
+Upload succesfull
+Start tests...
+Running test suite 'Simple Tests'...
+Tests run: 2 Successful: 2 Failed: 0
+
+=============================================================
+Starting test: examples/buildErrorTest
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Starting upload...
+Upload Failed
+
+=============================================================
+Starting test: examples/nonExistingFolder
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Error: unable to open test folder
+Check your config file
+
+=============================================================
+Starting test: examples/slowTest
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Starting upload...
+Upload succesfull
+Start tests...
+Running test suite 'Slow test (with a 10s delay)'...
+Tests run: 2 Successful: 2 Failed: 0
+
+=============================================================
+Starting test: examples/verySlowTest
+-------------------------------------------------------------
+Compiling & uploading sketch to Arduino...
+Starting upload...
+Upload succesfull
+Start tests...
+Running test suite 'Very slow test (with a 20s delay)'...
+Test timeout after 10 seconds
+
+=============================================================
+Summary: 
+-------------------------------------------------------------
+Failed tests:
+ 1.examples/floatingPin
+ 2.examples/buildErrorTest
+ 3.examples/nonExistingFolder
+ 4.examples/verySlowTest
+
+Passed tests:
+ 1.examples/inInterval
+ 2.examples/simpleTest
+ 3.examples/slowTest
+=============================================================
+
