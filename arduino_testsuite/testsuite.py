@@ -36,6 +36,7 @@ helper = TestHelper()
 
 class TestSuite:
     notFinished = True    # boolean value
+    foundTestPath = False
     uploadFinished = False
     FailedTestList = []
     PassedTestList = []
@@ -55,21 +56,26 @@ class TestSuite:
     def runTests(self):
         for index, test in enumerate(self.testList):
             self.setUp(test)
-            self.uploadSketch()
-            self.analyzeOutput(test)
+            if (self.foundTestPath):
+                self.uploadSketch()
+                self.analyzeOutput(test)
+                self.foundTestPath = False
 
     def setUp(self, item):
+        printer.printSetupInfo(item)
         try:
             os.chdir(scriptPath)
-        except(IOError):
-            print("Error: unable to open the script path")
+        except OSError:
+            print("Error: unable to open the script folder")
             print("This should never happen...")
         try:
             os.chdir(item)
-        except(IOError):
-            print("Error: unable to open the item path")
+            self.foundTestPath = True
+        except OSError:
+            print("Error: unable to open test folder")
             print("Check your config file")
-        printer.printSetupInfo(item)
+            self.foundTestPath = False
+            self.FailedTestList.append(item)
 
     def uploadSketch(self):
         state = helper.timeout_command("scons upload", 10)

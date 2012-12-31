@@ -37,17 +37,16 @@ class Settings:
 # This needs to be indented like this to print it correctly on the cli
         parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description='Arduino TestSuite commandline parameters:\
- serial port, inputfile',
+            description='Arduino TestSuite commandline arguments:',
             epilog=textwrap.dedent('''\
-This should be enough information to explain how you can call this script
+
 Report bugs to jeroendoggen@gmail.com.'''))
         parser.add_argument('-p', metavar='port',
-          help='The name of the serial port')
+          help='Set the name of the serial port')
         parser.add_argument('-f', metavar='file',
-          help='The inputfile containing the requested tests')
+          help='Select the inputfile containing the requested tests')
         parser.add_argument('-b', metavar='baudrate',
-          help='The baudrate of the serial port')
+          help='Set the baudrate of the serial port')
         args = parser.parse_args()
         if (args.p is not None):
             self.serialPort = args.p
