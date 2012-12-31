@@ -51,6 +51,12 @@ Bug reports:
 
 Changelog:
 ----------
+0.2.2: Error handling:
+ * Compile & upload errors
+ * Timing: timeout for uploading & running of the tests
+ * Missing files: wrong test folder, no config file
+ * Hardware: Disconnect Arduino during test
+
 0.2.1: Settings & configuration
  * Passing cli arguments & cli help messages
  * Settings separated from other code
