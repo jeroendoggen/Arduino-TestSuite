@@ -36,6 +36,7 @@ class Settings:
     def getCliArguments(self):
 # This needs to be indented like this to print it correctly on the cli
         parser = argparse.ArgumentParser(
+            prog='arduino_testsuite',
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description='Arduino TestSuite commandline arguments:',
             epilog=textwrap.dedent('''\

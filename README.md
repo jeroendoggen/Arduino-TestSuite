@@ -15,13 +15,13 @@ Installation:
 -------------
  * Download the source and run ``python setup.py install``
  * Python Package available in the Python Package Index at: http://pypi.python.org/pypi/arduino_testsuite
- * Install using pip: ``pip install ArduinoTestSuite``
+ * Install using pip: ``pip install arduino_testsuite``
 
 Usage:
 ------
- * Start the program with: ``python -m ArduinoTestSuite`` (or ``python main.py``)
+ * Start the program with: ``python -m arduino_testsuite``
  * Select the tests you want to run by editing: ``planned-tests.conf``
- * Getting help: ``python -m ArduinoTestSuite --help``
+ * Getting help: ``python -m arduino_testsuite`` --help``
  * Post issues to GitHub <http://github.com/jeroendoggen/Arduino-TestSuite/issues>.
 
 Requirements:
@@ -42,7 +42,7 @@ Limitations:
 
 License:
 --------
-If not stated otherwise ArduinoTestSuite is distributed in terms of the GPLv2 software license.
+If not stated otherwise arduino_testsuite is distributed in terms of the GPLv2 software license.
 See COPYING in the distribution for details.
 
 Bug reports:
