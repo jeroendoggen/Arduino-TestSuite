@@ -3,24 +3,6 @@
 # Arduino TestSuite to automate unit tests on the Arduino platform
 # Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
 #
-# Version History:
-#  - Version 0.1: call scons
-#                 run unit test
-#                 print summary
-#
-#  - Version 0.2: subprocess for arscons
-#                 classes: Test, TestSuite, InfoPrinter
-#                 Divided the code in several modules
-#
-#  - Version 0.2.1: Passing cli arguments & cli help messages
-#                   Settings separated from other code
-#                   Start tests from config file
-#
-# Roadmap:
-#  - report failed uploads, skip further testing?
-#  - logging to a file
-#  - what to to when arscons fails? (how to report?)
-#
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
@@ -38,8 +20,8 @@
 
 import sys
 
-from ArduinoTestSuite.test import Test
-from ArduinoTestSuite.testSuite import TestSuite
+from arduino_testsuite.test import Test
+from arduino_testsuite.testsuite import TestSuite
 
 suite = TestSuite()
 

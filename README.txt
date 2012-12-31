@@ -1,6 +1,5 @@
 Arduino TestSuite: Automated Arduino Unit Tests
 ===============================================
-
 This Python scripts allows automated running of several Arduino unit tests.
 The testing process is started on the PC but the tests run on the actual Arduino hardware.
 One set of unit tests is typically used to test one Arduino library.
@@ -16,7 +15,6 @@ Installation:
 -------------
  * Downloads source and run ``python setup.py install``
  * Python Package available in the Python Package Index at: http://pypi.python.org/pypi/ArduinoTestSuite/ (``pip install ArduinoTestSuite``)
-
 
 Usage:
 ------
@@ -44,48 +42,9 @@ License:
 If not stated otherwise ArduinoTestSuite is distributed in terms of the GPLv2 software license.
 See COPYING in the distribution for details.
 
-Typical Output:
----------------
-In this examples, two Arduino libraries are tested, one passes, one fails.
-
-````
-=============================================================
-Planned tests:
--------------------------------------------------------------
- 1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
- 2. My_Module/examples/TestSuite/
-
-Program flow:
- 1. Compile TestSuite sketch
- 2. Upload sketch using Arscons
- 3. Check unit test output
-
-=============================================================
-Starting test: DistanceSensor/examples/GP2Y0A21YK/TestSuite/
--------------------------------------------------------------
-Compiling & uploading sketch to Arduino...
-Upload succesfull
-Running test suite...
-Tests run: 3 Successful: 3 Failed: 0
-
-=============================================================
-Starting test: My_Module/examples/TestSuite/
--------------------------------------------------------------
-Compiling & uploading sketch to Arduino...
-Upload succesfull
-Running test suite...
-Assertion failed in 'temperatureRange' on line 68
-Tests run: 3 Successful: 2 Failed: 1
-
-=============================================================
-Summary:
-Failed tests:
- 1. My_Module/examples/TestSuite/
-
-Passed tests:
- 1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
-=============================================================
-````
+Bug reports:
+------------
+ * Jeroen Doggen <jeroendoggen@gmail.com>
 
 Changelog:
 ----------

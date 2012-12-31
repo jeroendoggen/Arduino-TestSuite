@@ -22,25 +22,7 @@
 import argparse
 import serial
 import textwrap
-
-#platform = os.environ.get('PLATFORM')
-
-#if platform == 'darwin':
-    ## For MacOS X, pick up the AVR tools from within Arduino.app
-    #ARDUINO_HOME_DEFAULT = '/Applications/Arduino.app/Contents/Resources/Java'
-    #ARDUINO_PORT_DEFAULT = getUsbTty('/dev/tty.usbserial*')
-    #SKETCHBOOK_HOME_DEFAULT = ''
-#elif platform == 'win32':
-    ## For Windows, use environment variables.
-    #ARDUINO_HOME_DEFAULT = os.environ.get('ARDUINO_HOME')
-    #ARDUINO_PORT_DEFAULT = os.environ.get('ARDUINO_PORT')
-    #SKETCHBOOK_HOME_DEFAULT = ''
-#else:
-    ## For Ubuntu Linux (9.10 or higher)
-    #ARDUINO_HOME_DEFAULT = '/usr/share/arduino/'
-    #ARDUINO_PORT_DEFAULT = getUsbTty('/dev/ttyUSB*')
-    #AVR_BIN_PREFIX = 'avr-'
-    #SKETCHBOOK_HOME_DEFAULT = os.path.realpath('~/share/arduino/sketchbook/')
+import sys
 
 
 class Settings:
@@ -80,6 +62,12 @@ Report bugs to jeroendoggen@gmail.com.'''))
         return(ser)
 
     def readConfigfile(self):
-        with open(self.configFile, 'r') as f:
-            testList = f.read().splitlines()
+        testList = []
+        try:
+            with open(self.configFile, 'r') as f:
+                testList = f.read().splitlines()
+        except IOError:
+            print ("Error: 'planned-tests.conf' not found!")
+            print ("Aborting test session.")
+            sys.exit(1)
         return testList

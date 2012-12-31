@@ -23,12 +23,12 @@ import os
 import time
 import argparse
 
-from ArduinoTestSuite.infoPrinter import InfoPrinter
-from ArduinoTestSuite.testHelper import TestHelper
-from ArduinoTestSuite.settings import Settings
+from arduino_testsuite.infoprinter import InfoPrinter
+from arduino_testsuite.testhelper import TestHelper
+from arduino_testsuite.settings import Settings
 
 
-librariesPath = "/usr/share/arduino/libraries"
+scriptPath = os.getcwd()
 
 printer = InfoPrinter()
 helper = TestHelper()
@@ -59,8 +59,16 @@ class TestSuite:
             self.analyzeOutput(test)
 
     def setUp(self, item):
-        os.chdir(librariesPath)
-        os.chdir(item)
+        try:
+            os.chdir(scriptPath)
+        except(IOError):
+            print("Error: unable to open the script path")
+            print("This should never happen...")
+        try:
+            os.chdir(item)
+        except(IOError):
+            print("Error: unable to open the item path")
+            print("Check your config file")
         printer.printSetupInfo(item)
 
     def uploadSketch(self):

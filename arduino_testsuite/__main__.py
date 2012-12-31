@@ -1,4 +1,4 @@
-from ArduinoTestSuite.main import run
+from arduino_testsuite.main import run
 
 if __name__ == '__main__':
     run()

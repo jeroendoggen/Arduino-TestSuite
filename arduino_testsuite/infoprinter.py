@@ -48,6 +48,7 @@ class InfoPrinter:
     def plannedTests(self, testList):
         self.helper.printTop()
         for index, item in enumerate(testList):
+            print (" ", end="")
             print (index + 1, end="")
             print (". ", end="")
             print (item)
