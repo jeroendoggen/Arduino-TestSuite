@@ -31,7 +31,9 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>This Python scripts allows automated running of several Arduino unit tests.
+        <h1>Arduino TestSuite: Automated Arduino Unit Tests</h1>
+
+<p>This Python scripts allows automated running of several Arduino unit tests.
 The testing process is started on the PC but the tests run on the actual Arduino hardware.
 One set of unit tests is typically used to test one Arduino library.</p>
 
@@ -46,9 +48,12 @@ The script prints a summary showing an overview of all the failed/passed tests i
 </ol><h2>Installation:</h2>
 
 <ul>
-<li>Downloads source and run <code>python setup.py install</code>
+<li>Download the source and run <code>python setup.py install</code>
 </li>
-<li>Python Package available in the Python Package Index at: <a href="http://pypi.python.org/pypi/ArduinoTestSuite/">http://pypi.python.org/pypi/ArduinoTestSuite/</a> (<code>pip install ArduinoTestSuite</code>)</li>
+<li>Python Package available in the Python Package Index at: <a href="http://pypi.python.org/pypi/arduino_testsuite">http://pypi.python.org/pypi/arduino_testsuite</a>
+</li>
+<li>Install using pip: <code>pip install ArduinoTestSuite</code>
+</li>
 </ul><h2>Usage:</h2>
 
 <ul>
@@ -71,62 +76,26 @@ The script prints a summary showing an overview of all the failed/passed tests i
 </ul><h2>Limitations:</h2>
 
 <ul>
-<li>Currently only tested on Linux
+<li>
+<p>Currently only tested on Linux</p>
 
 <ul>
 <li>Default paths are configured for Linux</li>
 <li>Subprocess handling only works on Linux</li>
 </ul>
 </li>
-<li>The program was created with other OS users in mind, so it will eventually get full cross-platform support. Help from Windows-developers is much appreciated.</li>
+<li><p>The program was created with other OS users in mind, so it will eventually get full cross-platform support. Help from Windows-developers is much appreciated.</p></li>
 </ul><h2>License:</h2>
 
 <p>If not stated otherwise ArduinoTestSuite is distributed in terms of the GPLv2 software license.
 See COPYING in the distribution for details.</p>
 
-<h2>Typical Output:</h2>
+<h2>Bug reports:</h2>
 
-<p>In this examples, two Arduino libraries are tested, one passes, one fails.</p>
-
-<pre><code>=============================================================
-Planned tests:
--------------------------------------------------------------
- 1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
- 2. My_Module/examples/TestSuite/
-
-Program flow:
- 1. Compile TestSuite sketch
- 2. Upload sketch using Arscons
- 3. Check unit test output
-
-=============================================================
-Starting test: DistanceSensor/examples/GP2Y0A21YK/TestSuite/
--------------------------------------------------------------
-Compiling &amp; uploading sketch to Arduino...
-Upload succesfull
-Running test suite...
-Tests run: 3 Successful: 3 Failed: 0
-
-=============================================================
-Starting test: My_Module/examples/TestSuite/
--------------------------------------------------------------
-Compiling &amp; uploading sketch to Arduino...
-Upload succesfull
-Running test suite...
-Assertion failed in 'temperatureRange' on line 68
-Tests run: 3 Successful: 2 Failed: 1
-
-=============================================================
-Summary: 
-Failed tests:
- 1. My_Module/examples/TestSuite/
-
-Passed tests:
- 1. DistanceSensor/examples/GP2Y0A21YK/TestSuite/
-=============================================================
-</code></pre>
-
-<h2>Changelog:</h2>
+<ul>
+<li>Jeroen Doggen <a href="mailto:jeroendoggen@gmail.com">jeroendoggen@gmail.com</a>
+</li>
+</ul><h2>Changelog:</h2>
 
 <p>0.2.1: Settings &amp; configuration</p>
 
