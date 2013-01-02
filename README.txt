@@ -21,7 +21,7 @@ Usage:
 ------
  * Start the program with: ``python -m arduino_testsuite``
  * Select the tests you want to run by editing: ``planned-tests.conf``
- * Getting help: ``python -m arduino_testsuite`` --help``
+ * Getting help: ``python -m arduino_testsuite --help``
  * Post issues to GitHub <http://github.com/jeroendoggen/Arduino-TestSuite/issues>.
 
 Requirements:
