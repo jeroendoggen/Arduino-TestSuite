@@ -32,7 +32,7 @@ from arduino_testsuite.settings import Settings
 
 scriptPath = os.getcwd()
 
-printer = InfoPrinter()
+
 helper = TestHelper()
 
 
@@ -46,18 +46,22 @@ class TestSuite:
     line = []
     testList = []
     config = Settings()
+    printer = InfoPrinter()
 
     def __init__(self):
+        """Initialize the suite: cli, config file, serial port."""
         self.config.getCliArguments()
         self.testList = self.config.readConfigfile()
         self.ser = self.config.initSerialPort()
 
     def printPlannedTests(self):
-        printer.plannedTests(self.testList)
+        """Print an overview of all the test that are planned"""
+        self.printer.plannedTests(self.testList)
 
     def runTests(self, timeout):
+        """Run all the tests"""
         for index, currentTest in enumerate(self.testList):
-            self.setUp(currentTest)
+            self.goToTestPath(currentTest)
             if (self.foundTestPath):
                 self.foundTestPath = False
                 print("Starting upload...")
@@ -68,8 +72,9 @@ class TestSuite:
                 else:
                     self.addToFailedList(currentTest)
 
-    def setUp(self, currentTest):
-        printer.printSetupInfo(currentTest)
+    def goToTestPath(self, currentTest):
+        """Go to the folder of the current test"""
+        self.printer.printSetupInfo(currentTest)
         try:
             os.chdir(scriptPath)
         except OSError:
@@ -85,10 +90,12 @@ class TestSuite:
             self.addToFailedList(currentTest)
 
     def uploadSketch(self, timeout):
+        """Upload the sketch to the Arduino board"""
         self.uploadStatus = helper.timeout_command("scons upload", timeout)
-        printer.uploadStatus(self.uploadStatus)
+        self.printer.uploadStatus(self.uploadStatus)
 
     def analyzeOutput(self, timeout, currentTest):
+        """Analyze the test output that is received over the serial port"""
         start = datetime.datetime.now()
         while self.notFinished:
             self.readLine(currentTest)
@@ -108,6 +115,7 @@ class TestSuite:
             self.failureCount = self.failureCount + 1
 
     def readLine(self, currentTest):
+        """Read one line of text over the serial port"""
         try:
             self.line = self.ser.readline().decode('utf-8')[:-1]
             print (self.line)
@@ -118,13 +126,17 @@ class TestSuite:
             self.notFinished = False
 
     def printSummary(self):
-        printer.printSummary(self.FailedTestList, self.PassedTestList)
+        """Print the summary of all the tests."""
+        self.printer.printSummary(self.FailedTestList, self.PassedTestList)
 
-    def report(self):
-        return(helper.report(self.failureCount))
+    def exitValue(self):
+        """Generate the exit value for the application."""
+        return(helper.exitValue(self.failureCount))
 
     def addToFailedList(self, currentTest):
+        """Add the current test to the list of failed tests."""
         self.FailedTestList.append(currentTest)
 
     def addToPassedList(self, currentTest):
+        """Add the current test to the list of passed tests."""
         self.PassedTestList.append(currentTest)

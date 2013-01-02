@@ -19,10 +19,18 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA  02110-1301, USA.
 
+from __future__ import print_function, division  # We require Python 2.6+
+
 import argparse
 import serial
 import textwrap
 import sys
+import logging
+
+logging.basicConfig(filename='example.log',
+    level=logging.DEBUG,
+    format='%(asctime)s %(name)s %(message)s')
+logger = logging.getLogger(__name__)
 
 
 class Settings:
@@ -34,7 +42,8 @@ class Settings:
     configFile = DEFAULT_CONFIGFILE
 
     def getCliArguments(self):
-# This needs to be indented like this to print it correctly on the cli
+        """Read all the cli arguments."""
+        """This needs to be indented like this to print it correctly on cli"""
         parser = argparse.ArgumentParser(
             prog='arduino_testsuite',
             formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -57,11 +66,19 @@ Report bugs to jeroendoggen@gmail.com.'''))
             self.baudrate = args.b
 
     def initSerialPort(self):
-        ser = serial.Serial(self.serialPort, self.baudrate)
-        ser.flush()
+        """Initialize the serial port."""
+        try:
+            ser = serial.Serial(self.serialPort, self.baudrate)
+            ser.flush()
+        except IOError:
+            logger.warning("Unable to connect to serial port")
+            print("Unable to connect to serial port: ", end="")
+            print(self.serialPort)
+            sys.exit(1)
         return(ser)
 
     def readConfigfile(self):
+        """Read the config file to get the testlist."""
         testList = []
         try:
             with open(self.configFile, 'r') as f:

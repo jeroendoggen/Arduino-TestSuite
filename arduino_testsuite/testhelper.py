@@ -48,7 +48,7 @@ class TestHelper:
                 return None
         return process.poll()
 
-    def report(self, failureCount):
+    def exitValue(self, failureCount):
         if (failureCount == 0):
             return 0
         else:

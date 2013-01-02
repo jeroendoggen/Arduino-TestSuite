@@ -4,3 +4,4 @@ build
 .sconsign.dblite
 *.elf
 *.hex
+*.log

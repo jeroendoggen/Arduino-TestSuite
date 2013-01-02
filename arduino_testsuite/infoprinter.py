@@ -46,6 +46,7 @@ class InfoPrinter:
     helper = InfoPrinterHelper()
 
     def plannedTests(self, testList):
+        """Print an overview of all the test that are planned"""
         self.helper.printTop()
         for index, item in enumerate(testList):
             print (" ", end="")
@@ -55,6 +56,7 @@ class InfoPrinter:
         self.helper.printProgramFlow()
 
     def printSetupInfo(self, item):
+        """Print text at start of a test."""
         print ("")
         self.helper.printMarker1()
         print ("Starting test: " + item)
@@ -62,6 +64,7 @@ class InfoPrinter:
         print ("Compiling & uploading sketch to Arduino...")
 
     def printSummary(self, FailedTestList, PassedTestList):
+        """Print the summary of all the tests."""
         print ("")
         self.helper.printMarker1()
         print ("Summary: ")
@@ -77,6 +80,7 @@ class InfoPrinter:
         print ("")
 
     def uploadStatus(self, uploadStatus):
+        """Print info about the outcome of the upload to the Arduino board."""
         if (uploadStatus == 0):
             self.uploadFinished = True
             print ("Upload succesfull")

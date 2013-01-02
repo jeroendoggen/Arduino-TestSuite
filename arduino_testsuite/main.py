@@ -32,7 +32,7 @@ def run(argv=None):
     suite.printPlannedTests()
     suite.runTests(timeout)
     suite.printSummary()
-    return(suite.report())
+    return(suite.exitValue())
 
 
 if __name__ == "__main__":
