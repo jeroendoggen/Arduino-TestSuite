@@ -19,10 +19,22 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA  02110-1301, USA.
 
+import unittest
+import random
 
-class Test:
-    def __init__(self, path):
-        self.path = path
+from arduino_testsuite.testhelper import TestHelper
 
-    def analyzeOutput(self):
-        print ("analyzeOutput")
+helper = TestHelper()
+
+
+class testArduino(unittest.TestCase):
+
+    def setUp(self):
+        self.seq = range(10)
+
+    def test_runArduinoTests(self):
+        self.assertEqual(0, 0)
+
+
+if __name__ == '__main__':
+    unittest.main()
