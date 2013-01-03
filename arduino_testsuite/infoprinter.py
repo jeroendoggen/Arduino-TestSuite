@@ -1,90 +1,80 @@
-#!/usr/bin/env python
-#
-# Arduino TestSuite to automate unit tests on the Arduino platform
-# Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
-# More info in "main.py"
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+""" Print information messages
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+This is currently used to keep the info messages out of the other code
+This can later be changed to become a logging interface.
 
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-# MA  02110-1301, USA.
+"""
 
 from __future__ import print_function, division  # We require Python 2.6+
 
 
-class InfoPrinterHelper:
-    def printMarker1(self):
-        print ("=============================================================")
-
-    def printMarker2(self):
-        print ("-------------------------------------------------------------")
-
-    def printTop(self):
-        print ("")
-        self.printMarker1()
-        print ("Planned tests:")
-
-    def printProgramFlow(self):
-        print ("")
-        print ("Program flow: ")
-        print (" 1. Compile TestSuite sketch")
-        print (" 2. Upload sketch using Arscons")
-        print (" 3. Check unit test output")
+def double_line():
+    """Print a double line"""
+    print ("=============================================================")
 
 
-class InfoPrinter:
-    helper = InfoPrinterHelper()
+def single_line():
+    """Print a single line"""
+    print ("-------------------------------------------------------------")
 
-    def plannedTests(self, testList):
-        """Print an overview of all the test that are planned"""
-        self.helper.printTop()
-        for index, item in enumerate(testList):
-            print (" ", end="")
-            print (index + 1, end="")
-            print (". ", end="")
-            print (item)
-        self.helper.printProgramFlow()
 
-    def printSetupInfo(self, item):
-        """Print text at start of a test."""
-        print ("")
-        self.helper.printMarker1()
-        print ("Starting test: " + item)
-        self.helper.printMarker2()
-        print ("Compiling & uploading sketch to Arduino...")
+def top():
+    """Print the top of the cli message"""
+    print ("")
+    double_line()
+    print ("Planned tests:")
 
-    def printSummary(self, FailedTestList, PassedTestList):
-        """Print the summary of all the tests."""
-        print ("")
-        self.helper.printMarker1()
-        print ("Summary: ")
-        self.helper.printMarker2()
-        print ("Failed tests:")
-        for index, item in enumerate(FailedTestList):
-            print (" " + str(index + 1) + "." + item)
-        print ("")
-        print ("Passed tests:")
-        for index, item in enumerate(PassedTestList):
-            print (" " + str(index + 1) + "." + item)
-        self.helper.printMarker1()
-        print ("")
 
-    def uploadStatus(self, uploadStatus):
-        """Print info about the outcome of the upload to the Arduino board."""
-        if (uploadStatus == 0):
-            self.uploadFinished = True
-            print ("Upload succesfull")
-            #print(".", end="")
-        else:
-            self.uploadFinished = False
-            print ("Upload Failed")
+def programflow():
+    """Print the program flow"""
+    print ("")
+    print ("Program flow: ")
+    print (" 1. Compile TestSuite sketch")
+    print (" 2. Upload sketch using Arscons")
+    print (" 3. Check unit test output")
+
+
+def planned_tests(test_list):
+    """Print an overview of all the test that are planned"""
+    top()
+    for index, item in enumerate(test_list):
+        print (" ", end="")
+        print (index + 1, end="")
+        print (". ", end="")
+        print (item)
+    programflow()
+
+
+def setup_info(item):
+    """Print text at start of a test."""
+    print ("")
+    double_line()
+    print ("Starting test: " + item)
+    single_line()
+    print ("Compiling & uploading sketch to Arduino...")
+
+
+def summary(failedtest_list, passedtest_list):
+    """Print the summary of all the tests."""
+    print ("")
+    double_line()
+    print ("Summary: ")
+    single_line()
+    print ("Failed tests:")
+    for index, item in enumerate(failedtest_list):
+        print (" " + str(index + 1) + "." + item)
+    print ("")
+    print ("Passed tests:")
+    for index, item in enumerate(passedtest_list):
+        print (" " + str(index + 1) + "." + item)
+    double_line()
+    print ("")
+
+
+def upload_status(state):
+    """Print info about the outcome of the upload to the Arduino board."""
+    if (state == 0):
+        print ("Upload succesfull")
+        #print(".", end="")
+    else:
+        print ("Upload Failed")
