@@ -4,6 +4,7 @@ TestSuite suite ("Very slow test (with a 20s delay)");
 
 void setup()
 {
+  Serial.begin(9600);
 }
 
 test(Passing)
