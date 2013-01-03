@@ -6,6 +6,7 @@ TestHelper helper;
 
 void setup()
 {
+  Serial.begin(9600);
 }
 
 test(interval)
