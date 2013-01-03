@@ -25,7 +25,7 @@ import time
 import argparse
 import datetime
 
-from arduino_testsuite.infoprinter import InfoPrinter
+import infoprinter
 from arduino_testsuite.testhelper import TestHelper
 from arduino_testsuite.settings import Settings
 
@@ -46,7 +46,6 @@ class TestSuite:
     line = []
     testList = []
     config = Settings()
-    printer = InfoPrinter()
 
     def __init__(self):
         """Initialize the suite: cli, config file, serial port."""
@@ -56,7 +55,8 @@ class TestSuite:
 
     def printPlannedTests(self):
         """Print an overview of all the test that are planned"""
-        self.printer.plannedTests(self.testList)
+        infoprinter.planned_tests(self.testList)
+        infoprinter.programflow()
 
     def runTests(self, timeout):
         """Run all the tests"""
@@ -74,7 +74,7 @@ class TestSuite:
 
     def goToTestPath(self, currentTest):
         """Go to the folder of the current test"""
-        self.printer.printSetupInfo(currentTest)
+        infoprinter.setup_info(currentTest)
         try:
             os.chdir(scriptPath)
         except OSError:
@@ -92,7 +92,7 @@ class TestSuite:
     def uploadSketch(self, timeout):
         """Upload the sketch to the Arduino board"""
         self.uploadStatus = helper.timeout_command("scons upload", timeout)
-        self.printer.uploadStatus(self.uploadStatus)
+        infoprinter.upload_status(self.uploadStatus)
 
     def analyzeOutput(self, timeout, currentTest):
         """Analyze the test output that is received over the serial port"""
@@ -127,7 +127,7 @@ class TestSuite:
 
     def printSummary(self):
         """Print the summary of all the tests."""
-        self.printer.printSummary(self.FailedTestList, self.PassedTestList)
+        infoprinter.summary(self.FailedTestList, self.PassedTestList)
 
     def exitValue(self):
         """Generate the exit value for the application."""

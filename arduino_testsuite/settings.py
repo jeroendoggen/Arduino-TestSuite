@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Arduino TestSuite to automate unit tests on the Arduino platform
+#  Arduino TestSuite to automate unit tests on the Arduino platform
 # Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
 # More info in "main.py"
 #
