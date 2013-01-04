@@ -29,10 +29,10 @@ def run():
     """Run the main program"""
     suite = TestSuite()
     timeout = 10
-    suite.printPlannedTests()
-    suite.runTests(timeout)
-    suite.printSummary()
-    return(suite.exitValue())
+    suite.print_planned_tests()
+    suite.run_tests(timeout)
+    suite.print_summary()
+    return(suite.exit_value())
 
 
 if __name__ == "__main__":

@@ -45,11 +45,13 @@ def planned_tests(test_list):
     programflow()
 
 
-def setup_info(item):
+def setup_info(index, current_test):
     """Print text at start of a test."""
     print ("")
     double_line()
-    print ("Starting test: " + item)
+    print ("Starting test ", end="")
+    print (index + 1, end=": ")
+    print (current_test)
     single_line()
     print ("Compiling & uploading sketch to Arduino...")
 

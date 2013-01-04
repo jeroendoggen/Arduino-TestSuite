@@ -1,4 +1,4 @@
-""" Main file to run
+""" arduino_testsuite: Main file to run
 
 This file is needed to be able to run a Python program in a folder directly
 by calling "Python foldername"
