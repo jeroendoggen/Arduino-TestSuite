@@ -10,13 +10,12 @@ from __future__ import print_function, division  # We require Python 2.6+
 
 import argparse
 import serial
-import textwrap
 import sys
 import logging
 
-logging.basicConfig(filename='example.log',
+logging.basicConfig(filename="example.log",
     level=logging.DEBUG,
-    format='%(asctime)s %(name)s %(message)s')
+    format="%(asctime)s %(name)s %(message)s")
 LOGGER = logging.getLogger(__name__)
 
 
@@ -37,18 +36,16 @@ class Settings:
         """Read all the cli arguments."""
         """This needs to be indented like this to print it correctly on cli"""
         parser = argparse.ArgumentParser(
-            prog='arduino_testsuite',
+            prog="arduino_testsuite",
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description='Arduino TestSuite commandline arguments:',
-            epilog=textwrap.dedent('''\
-
-Report bugs to jeroendoggen@gmail.com.'''))
-        parser.add_argument('-p', metavar='port',
-          help='Set the name of the serial port')
-        parser.add_argument('-f', metavar='file',
-          help='Select the inputfile containing the requested tests')
-        parser.add_argument('-b', metavar='baudrate',
-          help='Set the baudrate of the serial port')
+            description="Arduino TestSuite commandline arguments:",
+            epilog="Report bugs to jeroendoggen@gmail.com.")
+        parser.add_argument("-p", metavar="port",
+          help="Set the name of the serial port")
+        parser.add_argument("-f", metavar="file",
+          help="Select the inputfile containing the requested tests")
+        parser.add_argument("-b", metavar="baudrate",
+          help="Set the baudrate of the serial port")
         args = parser.parse_args()
         if (args.p is not None):
             self.serial_port = args.p
@@ -63,7 +60,7 @@ Report bugs to jeroendoggen@gmail.com.'''))
             ser = serial.Serial(self.serial_port, self.baudrate)
             ser.flush()
         except IOError:
-            logger.warning("Unable to connect to serial port")
+            LOGGER.warning("Unable to connect to serial port")
             print("Unable to connect to serial port: ", end="")
             print(self.serial_port)
             sys.exit(1)
@@ -73,7 +70,7 @@ Report bugs to jeroendoggen@gmail.com.'''))
         """Read the config file to get the testlist."""
         test_list = []
         try:
-            with open(self.config_file, 'r') as configfile:
+            with open(self.config_file, "r") as configfile:
                 test_list = configfile.read().splitlines()
         except IOError:
             print ("Error: 'planned-tests.conf' not found!")

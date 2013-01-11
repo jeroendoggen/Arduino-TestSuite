@@ -1,15 +1,23 @@
+"""Setup file for arduino_testsuite
+
+Define the options for the "arduino_testsuite" package
+Create source Python packages (python setup.py sdist)
+Create binary Python packages (python setup.py bdist)
+Upload these packages to PyPI (python setup.py sdist upload)
+
+"""
 from distutils.core import setup
 
 from arduino_testsuite import __version__
 
 
-with open('README.txt') as file:
-    long_description = file.read()
+with open('README.txt') as readme_file:
+    LONG_DESCRIPTION = readme_file.read()
 
 setup(name='arduino_testsuite',
       version=__version__,
       description='Arduino TestSuite for automated Arduino Unit Testing',
-      long_description=long_description,
+      long_description=LONG_DESCRIPTION,
       author='Jeroen Doggen',
       author_email='jeroendoggen@gmail.com',
       url='http://jeroendoggen.github.com/Arduino-TestSuite/',
