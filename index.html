@@ -52,18 +52,37 @@ The script prints a summary showing an overview of all the failed/passed tests i
 </li>
 <li>Python Package available in the Python Package Index at: <a href="http://pypi.python.org/pypi/arduino_testsuite">http://pypi.python.org/pypi/arduino_testsuite</a>
 </li>
-<li>Install using pip: <code>pip install ArduinoTestSuite</code>
+<li>Install using pip: <code>pip install arduino_testsuite</code>
 </li>
 </ul><h2>Usage:</h2>
 
 <ul>
-<li>Start the program with: <code>python -m arduino_testsuite</code> (or <code>python main.py</code>)</li>
+<li>Start the program with: <code>python -m arduino_testsuite</code>
+</li>
 <li>Select the tests you want to run by editing: <code>planned-tests.conf</code>
 </li>
 <li>Getting help: <code>python -m arduino_testsuite --help</code>
 </li>
 <li>Post issues to GitHub <a href="http://github.com/jeroendoggen/Arduino-TestSuite/issues">http://github.com/jeroendoggen/Arduino-TestSuite/issues</a>.</li>
-</ul><h2>Requirements:</h2>
+</ul><h2>Typical test output:</h2>
+
+<pre><code>user@computer:~/tests$ python -m arduino_testsuite
+==============================
+Planned tests:
+ 1. examples/floatingPin
+ 2. examples/inInterval
+ 3. examples/simpleTest
+ 4. examples/buildErrorTest
+ 5. examples/nonExistingFolder
+ 6. examples/slowTest
+ 7. examples/verySlowTest
+==============================
+.... output normally continues for a while ... link to full log below.
+</code></pre>
+
+<p><a href="https://raw.github.com/jeroendoggen/Arduino-TestSuite/master/resources/example.log">https://raw.github.com/jeroendoggen/Arduino-TestSuite/master/resources/example.log</a></p>
+
+<h2>Requirements:</h2>
 
 <ul>
 <li>The unit tests are written with the "Arduino Unit Testing Library": <a href="http://code.google.com/p/arduinounit">http://code.google.com/p/arduinounit</a>
@@ -87,7 +106,7 @@ The script prints a summary showing an overview of all the failed/passed tests i
 <li><p>The program was created with other OS users in mind, so it will eventually get full cross-platform support. Help from Windows-developers is much appreciated.</p></li>
 </ul><h2>License:</h2>
 
-<p>If not stated otherwise ArduinoTestSuite is distributed in terms of the GPLv2 software license.
+<p>If not stated otherwise arduino_testsuite is distributed in terms of the GPLv2 software license.
 See COPYING in the distribution for details.</p>
 
 <h2>Bug reports:</h2>
