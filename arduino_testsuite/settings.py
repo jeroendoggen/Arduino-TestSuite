@@ -9,10 +9,16 @@ read the config file
 from __future__ import print_function, division  # We require Python 2.6+
 
 import argparse
-import serial
 import textwrap
 import sys
 import logging
+
+try:
+    import serial
+except ImportError as exc:
+    print("Error: failed to import pyserial module")
+    print("Solution: you probably need to install the pyserial module")
+    sys.exit(0)
 
 logging.basicConfig(filename='example.log',
     level=logging.DEBUG,
@@ -63,7 +69,7 @@ Report bugs to jeroendoggen@gmail.com.'''))
             ser = serial.Serial(self.serial_port, self.baudrate)
             ser.flush()
         except IOError:
-            logger.warning("Unable to connect to serial port")
+            LOGGER.warning("Unable to connect to serial port")
             print("Unable to connect to serial port: ", end="")
             print(self.serial_port)
             sys.exit(1)
