@@ -9,7 +9,6 @@ read the config file
 from __future__ import print_function, division  # We require Python 2.6+
 
 import argparse
-import textwrap
 import sys
 import logging
 
