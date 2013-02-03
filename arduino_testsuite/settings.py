@@ -28,8 +28,10 @@ import platform
 class Settings:
     DEFAULT_PORT_UNIX = "/dev/ttyUSB0"
     DEFAULT_PORT_WINDOWS = "COM3"
+    DEFAULT_BOARD = "atmega328"
     DEFAULT_BAUDRATE = 9600
     DEFAULT_CONFIGFILE = "planned-tests.conf"
+    board = DEFAULT_BOARD
     baudrate = DEFAULT_BAUDRATE
     configFile = DEFAULT_CONFIGFILE
 
@@ -47,6 +49,8 @@ class Settings:
 Report bugs to jeroendoggen@gmail.com.'''))
         parser.add_argument('-p', metavar='port',
           help='Set the name of the serial port')
+        parser.add_argument('-d', metavar='board',
+          help='Set the name of the board as defined in boards.txt')
         parser.add_argument('-f', metavar='file',
           help='Select the inputfile containing the requested tests')
         parser.add_argument('-b', metavar='baudrate',
@@ -54,6 +58,8 @@ Report bugs to jeroendoggen@gmail.com.'''))
         args = parser.parse_args()
         if (args.p is not None):
             self.serialPort = args.p
+        if (args.d is not None):
+            self.board = args.d
         if (args.f is not None):
             self.configFile = args.f
         if (args.b is not None):

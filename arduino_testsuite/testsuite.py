@@ -89,7 +89,8 @@ class TestSuite:
             sconsCommand += ".bat"
         sconstructDirArgument = "--directory=" + os.getcwd()
         portArgument = "ARDUINO_PORT=" + self.config.serialPort
-        self.uploadStatus = helper.timeout_command(sconsCommand + " " + sconstructDirArgument + " " + portArgument + " upload", timeout)
+        boardArgument = "ARDUINO_BOARD=" + self.config.board
+        self.uploadStatus = helper.timeout_command(sconsCommand + " " + sconstructDirArgument + " " + boardArgument + " " + portArgument + " upload", timeout)
         printer.uploadStatus(self.uploadStatus)
 
     def analyzeOutput(self, timeout, currentTest):
