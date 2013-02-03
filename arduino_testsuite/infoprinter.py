@@ -79,7 +79,7 @@ class InfoPrinter:
     def uploadStatus(self, uploadStatus):
         if (uploadStatus == 0):
             self.uploadFinished = True
-            print ("Upload succesfull")
+            print ("Upload succesful")
             #print(".", end="")
         else:
             self.uploadFinished = False
