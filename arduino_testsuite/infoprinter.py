@@ -76,7 +76,7 @@ def summary(failedtest_list, passedtest_list):
 def upload_status(state):
     """Print info about the outcome of the upload to the Arduino board."""
     if (state == 0):
-        print ("Upload succesful")
+        print ("Upload succesfull")
         #print(".", end="")
     else:
         print ("Upload Failed")
