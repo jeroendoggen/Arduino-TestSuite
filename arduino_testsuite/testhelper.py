@@ -13,13 +13,14 @@ import datetime
 import os
 import sys
 
+
 def timed_cmd(command, timeout):
     """Call a cmd and kill it after 'timeout' seconds"""
     cmd = command.split(" ")
     start = datetime.datetime.now()
-    workingDir = os.path.dirname(sys.executable)
+    working_dir = os.path.dirname(sys.executable)
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE,
-      stderr=subprocess.PIPE, cwd=os.path.join(workingDir, "Scripts"))
+      stderr=subprocess.PIPE, cwd=os.path.join(working_dir, "Scripts"))
 
     while process.poll() is None:
         now = datetime.datetime.now()
@@ -29,12 +30,12 @@ def timed_cmd(command, timeout):
             process.terminate()
             return None
 
-    exitCode = process.poll()
+    exit_code = process.poll()
 
-    if exitCode != 0:
+    if exit_code != 0:
         stdout, stderr = process.communicate()
 
         print(stdout)
         print(stderr)
 
-    return exitCode
+    return exit_code
