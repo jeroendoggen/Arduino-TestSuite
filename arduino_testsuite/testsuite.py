@@ -50,7 +50,6 @@ class TestSuite:
     def __init__(self):
         self.config.getCliArguments()
         self.testList = self.config.readConfigfile()
-        self.ser = self.config.initSerialPort()
 
     def printPlannedTests(self):
         printer.plannedTests(self.testList)
@@ -85,10 +84,17 @@ class TestSuite:
             self.addToFailedList(currentTest)
 
     def uploadSketch(self, timeout):
-        self.uploadStatus = helper.timeout_command("scons upload", timeout)
+        sconsCommand = "scons"
+        if self.config.isWindows():
+            sconsCommand += ".bat"
+        sconstructDirArgument = "--directory=" + os.getcwd()
+        portArgument = "ARDUINO_PORT=" + self.config.serialPort
+        self.uploadStatus = helper.timeout_command(sconsCommand + " " + sconstructDirArgument + " " + portArgument + " upload", timeout)
         printer.uploadStatus(self.uploadStatus)
 
     def analyzeOutput(self, timeout, currentTest):
+        self.ser = self.config.initSerialPort()
+
         start = datetime.datetime.now()
         while self.notFinished:
             self.readLine(currentTest)
@@ -106,6 +112,8 @@ class TestSuite:
         else:
             self.FailedTestList.append(currentTest)
             self.failureCount = self.failureCount + 1
+
+        self.ser.close()
 
     def readLine(self, currentTest):
         try:

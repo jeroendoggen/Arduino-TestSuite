@@ -23,15 +23,18 @@ import argparse
 import serial
 import textwrap
 import sys
-
+import platform
 
 class Settings:
-    DEFAULT_PORT = "/dev/ttyUSB0"
+    DEFAULT_PORT_UNIX = "/dev/ttyUSB0"
+    DEFAULT_PORT_WINDOWS = "COM3"
     DEFAULT_BAUDRATE = 9600
     DEFAULT_CONFIGFILE = "planned-tests.conf"
-    serialPort = DEFAULT_PORT
     baudrate = DEFAULT_BAUDRATE
     configFile = DEFAULT_CONFIGFILE
+
+    def __init__(self):
+        self.serialPort = self.defaultPort()
 
     def getCliArguments(self):
 # This needs to be indented like this to print it correctly on the cli
@@ -71,3 +74,12 @@ Report bugs to jeroendoggen@gmail.com.'''))
             print ("Aborting test session.")
             sys.exit(1)
         return testList
+
+    def defaultPort(self):
+        if self.isWindows():
+            return self.DEFAULT_PORT_WINDOWS
+
+        return self.DEFAULT_PORT_UNIX
+
+    def isWindows(self):
+        return platform.system() == 'Windows'
