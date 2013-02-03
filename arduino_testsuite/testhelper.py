@@ -28,4 +28,13 @@ def timed_cmd(command, timeout):
             print ("Process timeout")
             process.terminate()
             return None
-    return process.poll()
+
+    exitCode = process.poll()
+
+    if exitCode != 0:
+        stdout, stderr = process.communicate()
+
+        print(stdout)
+        print(stderr)
+
+    return exitCode
