@@ -11,6 +11,7 @@ from __future__ import print_function, division  # We require Python 2.6+
 import argparse
 import sys
 import logging
+import platform
 
 try:
     import serial
@@ -27,16 +28,17 @@ LOGGER = logging.getLogger(__name__)
 
 class Settings:
     """Configure the settings of the program"""
-    DEFAULT_PORT = "/dev/ttyUSB0"
+    DEFAULT_PORT_UNIX = "/dev/ttyUSB0"
+    DEFAULT_PORT_WINDOWS = "COM3"
     DEFAULT_BAUDRATE = 9600
     DEFAULT_CONFIGFILE = "planned-tests.conf"
-    serial_port = DEFAULT_PORT
     baudrate = DEFAULT_BAUDRATE
     config_file = DEFAULT_CONFIGFILE
 
     def __init__(self):
-        """Initialize the settings: do nothing for now."""
-        pass
+        """Initialize the platform-specific serial port"""
+        self.serial_port = self.default_port()
+
 
     def get_cli_arguments(self):
         """Read all the cli arguments."""
@@ -83,3 +85,12 @@ class Settings:
             print ("Aborting test session.")
             sys.exit(1)
         return test_list
+
+    def default_port(self):
+        if self.is_windows():
+            return self.DEFAULT_PORT_WINDOWS
+
+        return self.DEFAULT_PORT_UNIX
+
+    def is_windows(self):
+        return platform.system() == 'Windows'

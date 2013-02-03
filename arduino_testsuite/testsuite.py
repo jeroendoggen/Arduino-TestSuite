@@ -29,10 +29,9 @@ class TestSuite:
     scriptpath = os.getcwd()
 
     def __init__(self):
-        """Initialize the suite: cli, config file, serial port."""
+        """Initialize the suite: cli, config file."""
         self.config.get_cli_arguments()
         self.test_list = self.config.read_testlist_file()
-        self.ser = self.config.init_serial_port()
 
     def print_planned_tests(self):
         """Print an overview of all the test that are planned"""
@@ -72,11 +71,22 @@ class TestSuite:
 
     def upload_sketch(self, timeout):
         """Upload the sketch to the Arduino board"""
-        self.upload_status = testhelper.timed_cmd("scons upload", timeout)
+        scons_command = "scons"
+        if self.config.is_windows():
+            scons_command += ".bat"
+        sconstruct_dir_argument = "--directory=" + os.getcwd()
+        port_argument = "ARDUINO_PORT=" + self.config.serial_port
+        self.upload_status = testhelper.timed_cmd(
+          scons_command + " " + 
+          sconstruct_dir_argument + " " + 
+          port_argument + " " + 
+          "upload", timeout)
         infoprinter.upload_status(self.upload_status)
 
     def analyze_output(self, timeout, current_test):
         """Analyze the test output that is received over the serial port"""
+        self.ser = self.config.init_serial_port()
+
         start = datetime.datetime.now()
         while self.not_finished:
             self.read_line(current_test)
@@ -94,6 +104,8 @@ class TestSuite:
         else:
             self.failed_test_list.append(current_test)
             self.failure_count = self.failure_count + 1
+
+        self.ser.close()
 
     def read_line(self, current_test):
         """Read one line of text over the serial port"""
