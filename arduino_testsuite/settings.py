@@ -41,7 +41,6 @@ class Settings:
         """Initialize the platform-specific serial port"""
         self.serial_port = self.default_port()
 
-
     def get_cli_arguments(self):
         """Read all the cli arguments."""
         """This needs to be indented like this to print it correctly on cli"""
@@ -93,10 +92,8 @@ class Settings:
         return test_list
 
     def default_port(self):
-        if self.is_windows():
+        """Get the default serial port on different platforms"""
+        if platform.system() == 'Windows':
             return self.DEFAULT_PORT_WINDOWS
 
         return self.DEFAULT_PORT_UNIX
-
-    def is_windows(self):
-        return platform.system() == 'Windows'

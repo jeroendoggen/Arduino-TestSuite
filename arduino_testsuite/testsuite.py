@@ -78,10 +78,10 @@ class TestSuite:
         port_argument = "ARDUINO_PORT=" + self.config.serial_port
         board_argument = "ARDUINO_BOARD=" + self.config.board
         self.upload_status = testhelper.timed_cmd(
-          scons_command + " " + 
-          sconstruct_dir_argument + " " + 
-          port_argument + " " + 
-          board_argument + " " + 
+          scons_command + " " +
+          sconstruct_dir_argument + " " +
+          port_argument + " " +
+          board_argument + " " +
           "upload", timeout)
         infoprinter.upload_status(self.upload_status)
 
