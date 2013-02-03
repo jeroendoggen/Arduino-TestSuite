@@ -22,7 +22,25 @@ Usage:
  * Start the program with: ``python -m arduino_testsuite``
  * Select the tests you want to run by editing: ``planned-tests.conf``
  * Getting help: ``python -m arduino_testsuite --help``
- * Post issues to GitHub <http://github.com/jeroendoggen/Arduino-TestSuite/issues>.
+ * Post issues to GitHub http://github.com/jeroendoggen/Arduino-TestSuite/issues.
+ 
+Typical test output:
+--------------------
+
+    user@computer:~/tests$ python -m arduino_testsuite
+    ==============================
+    Planned tests:
+     1. examples/floatingPin
+     2. examples/inInterval
+     3. examples/simpleTest
+     4. examples/buildErrorTest
+     5. examples/nonExistingFolder
+     6. examples/slowTest
+     7. examples/verySlowTest
+    ==============================
+    .... output normally continues for a while ... link to full log below.
+
+https://raw.github.com/jeroendoggen/Arduino-TestSuite/master/resources/example.log
 
 Requirements:
 -------------

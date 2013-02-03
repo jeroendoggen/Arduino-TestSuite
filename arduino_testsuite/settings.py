@@ -1,31 +1,33 @@
-#!/usr/bin/env python
-#
-# Arduino TestSuite to automate unit tests on the Arduino platform
-# Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
-# More info in "main.py"
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+""" arduino_testsuite: Settings class
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+get the cli arguments
+setup the serial port
+read the config file
 
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-# MA  02110-1301, USA.
+"""
+
+from __future__ import print_function, division  # We require Python 2.6+
 
 import argparse
-import serial
-import textwrap
 import sys
+import logging
 import platform
 
+try:
+    import serial
+except ImportError as exc:
+    print("Error: failed to import pyserial module")
+    print("Solution: you probably need to install the pyserial module")
+    sys.exit(0)
+
+logging.basicConfig(filename='example.log',
+    level=logging.DEBUG,
+    format="%(asctime)s %(name)s %(message)s")
+LOGGER = logging.getLogger(__name__)
+
+
 class Settings:
+    """Configure the settings of the program"""
     DEFAULT_PORT_UNIX = "/dev/ttyUSB0"
     DEFAULT_PORT_WINDOWS = "COM3"
     DEFAULT_BOARD = "atmega328"
@@ -33,59 +35,68 @@ class Settings:
     DEFAULT_CONFIGFILE = "planned-tests.conf"
     board = DEFAULT_BOARD
     baudrate = DEFAULT_BAUDRATE
-    configFile = DEFAULT_CONFIGFILE
+    config_file = DEFAULT_CONFIGFILE
 
     def __init__(self):
-        self.serialPort = self.defaultPort()
+        """Initialize the platform-specific serial port"""
+        self.serial_port = self.default_port()
 
-    def getCliArguments(self):
-# This needs to be indented like this to print it correctly on the cli
+
+    def get_cli_arguments(self):
+        """Read all the cli arguments."""
+        """This needs to be indented like this to print it correctly on cli"""
         parser = argparse.ArgumentParser(
-            prog='arduino_testsuite',
+            prog="arduino_testsuite",
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description='Arduino TestSuite commandline arguments:',
-            epilog=textwrap.dedent('''\
-
-Report bugs to jeroendoggen@gmail.com.'''))
-        parser.add_argument('-p', metavar='port',
-          help='Set the name of the serial port')
+            description="Arduino TestSuite commandline arguments:",
+            epilog="Report bugs to jeroendoggen@gmail.com.")
+        parser.add_argument("-p", metavar="port",
+          help="Set the name of the serial port")
         parser.add_argument('-d', metavar='board',
           help='Set the name of the board as defined in boards.txt')
-        parser.add_argument('-f', metavar='file',
-          help='Select the inputfile containing the requested tests')
-        parser.add_argument('-b', metavar='baudrate',
-          help='Set the baudrate of the serial port')
+        parser.add_argument("-f", metavar="file",
+          help="Select the inputfile containing the requested tests")
+        parser.add_argument("-b", metavar="baudrate",
+          help="Set the baudrate of the serial port")
         args = parser.parse_args()
         if (args.p is not None):
-            self.serialPort = args.p
+            self.serial_port = args.p
         if (args.d is not None):
             self.board = args.d
         if (args.f is not None):
-            self.configFile = args.f
+            self.config_file = args.f
         if (args.b is not None):
             self.baudrate = args.b
 
-    def initSerialPort(self):
-        ser = serial.Serial(self.serialPort, self.baudrate)
-        ser.flush()
+    def init_serial_port(self):
+        """Initialize the serial port."""
+        try:
+            ser = serial.Serial(self.serial_port, self.baudrate)
+            ser.flush()
+        except IOError:
+            LOGGER.warning("Unable to connect to serial port")
+            print("Unable to connect to serial port: ", end="")
+            print(self.serial_port)
+            sys.exit(1)
         return(ser)
 
-    def readConfigfile(self):
-        testList = []
+    def read_testlist_file(self):
+        """Read the config file to get the testlist."""
+        test_list = []
         try:
-            with open(self.configFile, 'r') as f:
-                testList = f.read().splitlines()
+            with open(self.config_file, "r") as configfile:
+                test_list = configfile.read().splitlines()
         except IOError:
             print ("Error: 'planned-tests.conf' not found!")
             print ("Aborting test session.")
             sys.exit(1)
-        return testList
+        return test_list
 
-    def defaultPort(self):
-        if self.isWindows():
+    def default_port(self):
+        if self.is_windows():
             return self.DEFAULT_PORT_WINDOWS
 
         return self.DEFAULT_PORT_UNIX
 
-    def isWindows(self):
+    def is_windows(self):
         return platform.system() == 'Windows'

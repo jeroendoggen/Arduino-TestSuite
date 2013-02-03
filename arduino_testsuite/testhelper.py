@@ -1,23 +1,9 @@
-#!/usr/bin/env python
-#
-# Arduino TestSuite to automate unit tests on the Arduino platform
-# Copyright (C) 2012  Jeroen Doggen <jeroendoggen@gmail.com>
-# More info in "main.py"
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+""" arduino_testsuite: Test helper functions
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+run a command with a given timeout
+return the exit value for the program
 
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-# MA  02110-1301, USA.
+"""
 
 from __future__ import print_function, division  # We require Python 2.6+
 
@@ -27,28 +13,19 @@ import datetime
 import os
 import sys
 
-class TestHelper:
-    def timeout_command(self, command, timeout):
-        #"""call shell-command and either return its output or kill it
-        #if it doesn't normally exit within timeout seconds and return None"""
+def timed_cmd(command, timeout):
+    """Call a cmd and kill it after 'timeout' seconds"""
+    cmd = command.split(" ")
+    start = datetime.datetime.now()
+    workingDir = os.path.dirname(sys.executable)
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+      stderr=subprocess.PIPE, cwd=os.path.join(workingDir, "Scripts"))
 
-        cmd = command.split(" ")
-        start = datetime.datetime.now()
-        workingDir = os.path.dirname(sys.executable)
-        process = subprocess.Popen(cmd, stdout=subprocess.PIPE,
-          stderr=subprocess.PIPE, cwd=os.path.join(workingDir, "Scripts"))
-
-        while process.poll() is None:
-            now = datetime.datetime.now()
-            time.sleep(1)
-            if (now - start).seconds > timeout:
-                print ("Process timeout")
-                process.terminate()
-                return None
-        return process.poll()
-
-    def report(self, failureCount):
-        if (failureCount == 0):
-            return 0
-        else:
-            return 42
+    while process.poll() is None:
+        now = datetime.datetime.now()
+        time.sleep(1)
+        if (now - start).seconds > timeout:
+            print ("Process timeout")
+            process.terminate()
+            return None
+    return process.poll()
