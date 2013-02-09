@@ -9,6 +9,7 @@ from __future__ import print_function, division  # We require Python 2.6+
 import os
 import time
 import datetime
+import platform
 
 import infoprinter
 import testhelper
@@ -72,7 +73,7 @@ class TestSuite:
     def upload_sketch(self, timeout):
         """Upload the sketch to the Arduino board"""
         scons_command = "scons"
-        if self.config.is_windows():
+        if platform.system() == 'Windows':
             scons_command += ".bat"
         sconstruct_dir_argument = "--directory=" + os.getcwd()
         port_argument = "ARDUINO_PORT=" + self.config.serial_port
