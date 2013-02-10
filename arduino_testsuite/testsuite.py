@@ -87,11 +87,11 @@ class TestSuite:
 
     def analyze_output(self, timeout, current_test):
         """Analyze the test output that is received over the serial port"""
-        self.ser = self.config.init_serial_port()
+        serial_port = self.config.init_serial_port()
 
         start = datetime.datetime.now()
         while self.not_finished:
-            self.read_line(current_test)
+            self.read_line(serial_port, current_test)
             time.sleep(0.1)
             now = datetime.datetime.now()
             if (now - start).seconds > timeout:
@@ -107,12 +107,12 @@ class TestSuite:
             self.failed_test_list.append(current_test)
             self.failure_count = self.failure_count + 1
 
-        self.ser.close()
+        serial_port.close()
 
-    def read_line(self, current_test):
+    def read_line(self, serial_port, current_test):
         """Read one line of text over the serial port"""
         try:
-            self.line = self.ser.readline().decode('utf-8')[:-1]
+            self.line = serial_port.readline().decode('utf-8')[:-1]
             print (self.line)
         except IOError:
             print ("unexpectedly lost serial connection")
