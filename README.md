@@ -51,12 +51,8 @@ Requirements:
 
 Limitations:
 ------------
- * Currently only tested on Linux
-
-  * Default paths are configured for Linux
-  * Subprocess handling only works on Linux
-
- * The program was created with other OS users in mind, so it will eventually get full cross-platform support. Help from Windows-developers is much appreciated.
+ * Currently only tested on Linux and Windows 7
+ * The program was created with other OS users in mind, so it will eventually get full cross-platform support.
 
 License:
 --------
