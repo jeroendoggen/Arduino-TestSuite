@@ -31,9 +31,7 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>Arduino TestSuite: Automated Arduino Unit Tests</h1>
-
-<p>This Python scripts allows automated running of several Arduino unit tests.
+        <p>This Python scripts allows automated running of several Arduino unit tests.
 The testing process is started on the PC but the tests run on the actual Arduino hardware.
 One set of unit tests is typically used to test one Arduino library.</p>
 
@@ -45,7 +43,8 @@ One set of unit tests is typically used to test one Arduino library.</p>
 <li>The results of the test are printed over the serial port and analyzed by the Python script.</li>
 <li>The script starts the next test, repeating steps 1,2 and 3 for all test that are requested in the configuration file.
 The script prints a summary showing an overview of all the failed/passed tests in the complete testsuite.</li>
-</ol><h2>Installation:</h2>
+</ol><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation:</h2>
 
 <ul>
 <li>Download the source and run <code>python setup.py install</code>
@@ -54,7 +53,8 @@ The script prints a summary showing an overview of all the failed/passed tests i
 </li>
 <li>Install using pip: <code>pip install arduino_testsuite</code>
 </li>
-</ul><h2>Usage:</h2>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage:</h2>
 
 <ul>
 <li>Start the program with: <code>python -m arduino_testsuite</code>
@@ -64,7 +64,8 @@ The script prints a summary showing an overview of all the failed/passed tests i
 <li>Getting help: <code>python -m arduino_testsuite --help</code>
 </li>
 <li>Post issues to GitHub <a href="http://github.com/jeroendoggen/Arduino-TestSuite/issues">http://github.com/jeroendoggen/Arduino-TestSuite/issues</a>.</li>
-</ul><h2>Typical test output:</h2>
+</ul><h2>
+<a name="typical-test-output" class="anchor" href="#typical-test-output"><span class="octicon octicon-link"></span></a>Typical test output:</h2>
 
 <pre><code>user@computer:~/tests$ python -m arduino_testsuite
 ==============================
@@ -82,7 +83,8 @@ Planned tests:
 
 <p><a href="https://raw.github.com/jeroendoggen/Arduino-TestSuite/master/resources/example.log">https://raw.github.com/jeroendoggen/Arduino-TestSuite/master/resources/example.log</a></p>
 
-<h2>Requirements:</h2>
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements:</h2>
 
 <ul>
 <li>The unit tests are written with the "Arduino Unit Testing Library": <a href="http://code.google.com/p/arduinounit">http://code.google.com/p/arduinounit</a>
@@ -92,29 +94,26 @@ Planned tests:
 <li>The code is uploaded to the Arduino board with "Arscons: scons script for Arduino": <a href="http://github.com/suapapa/arscons">http://github.com/suapapa/arscons</a>
 </li>
 <li>Python 2.6+ packages: pyserial</li>
-</ul><h2>Limitations:</h2>
+</ul><h2>
+<a name="limitations" class="anchor" href="#limitations"><span class="octicon octicon-link"></span></a>Limitations:</h2>
 
 <ul>
-<li>
-<p>Currently only tested on Linux</p>
-
-<ul>
-<li>Default paths are configured for Linux</li>
-<li>Subprocess handling only works on Linux</li>
-</ul>
-</li>
-<li><p>The program was created with other OS users in mind, so it will eventually get full cross-platform support. Help from Windows-developers is much appreciated.</p></li>
-</ul><h2>License:</h2>
+<li>Currently only tested on Linux and Windows 7</li>
+<li>The program was created with other OS users in mind, so it will eventually get full cross-platform support.</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License:</h2>
 
 <p>If not stated otherwise arduino_testsuite is distributed in terms of the GPLv2 software license.
 See COPYING in the distribution for details.</p>
 
-<h2>Bug reports:</h2>
+<h2>
+<a name="bug-reports" class="anchor" href="#bug-reports"><span class="octicon octicon-link"></span></a>Bug reports:</h2>
 
 <ul>
 <li>Jeroen Doggen <a href="mailto:jeroendoggen@gmail.com">jeroendoggen@gmail.com</a>
 </li>
-</ul><h2>Changelog:</h2>
+</ul><h2>
+<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog:</h2>
 
 <p>0.2.2: Error handling:</p>
 
